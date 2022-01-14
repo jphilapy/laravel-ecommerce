@@ -18,9 +18,7 @@ class ProductTest extends TestCase
         $product = factory(Product::class)->create([
             'price' => 1099
         ]
-    );
-
-        $formattedPrice = $product->getPrice();
+        );
 
         $this->assertEquals('10.99', $product->getPrice());
     }
