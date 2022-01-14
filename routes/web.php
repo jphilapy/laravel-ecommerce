@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/products', 'ProductsController@index');
+Route::put('/cart/{product}', 'CartController@update');
+Route::get('/cart', 'CartController@index');
+
 
 Route::get('/', function () {
     return view('welcome');
