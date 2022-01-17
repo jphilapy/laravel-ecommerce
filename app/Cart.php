@@ -26,4 +26,8 @@ class Cart
 
         return number_format($totalPrice / 100, 2);
     }
+
+    public function total() {
+
+    }
 }
