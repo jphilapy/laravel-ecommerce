@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use Illuminate\Http\Request;
 use App\Contracts\PaymentContract;
 use App\FakePayment;
@@ -20,5 +21,10 @@ class OrdersController extends Controller
         $cart = new Cart();
 
         $this->payment->charge($cart->total(), request('stripeToken'));
+
+        Order::create([
+           'email'=>request('stripeEmail'),
+           'total'=> $this->payment->total(),
+        ]);
     }
 }

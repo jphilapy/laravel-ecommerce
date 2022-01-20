@@ -16,7 +16,13 @@ class FakePayment implements PaymentContract
         return number_format($this->total/100, 2);
     }
 
-	function charge($total, $token) {
+	public function charge($total, $token) {
         $this->total = $total;
 	}
+
+    public function total() {
+        return $this->total;
+    }
+
+
 }
