@@ -19,8 +19,6 @@ class OrdersController extends Controller
     public function store() {
         $cart = new Cart();
 
-
-
-        $payment->charge($cart->total(), request('stripeToken'));
+        $this->payment->charge($cart->total(), request('stripeToken'));
     }
 }

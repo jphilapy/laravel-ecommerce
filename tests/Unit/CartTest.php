@@ -41,4 +41,20 @@ class CartTest extends TestCase
 
         $this->assertEquals('30.00', $cart->totalPrice());
     }
+
+    /**
+     * @test
+     */
+    public function it_has_a_total_in_cents() {
+        $products = factory(Product::class, 3)->create([
+            'price' => 1000
+        ]);
+        $cart = new Cart();
+
+        foreach($products as $product) {
+            $cart->add($product, $product->id);
+        }
+
+        $this->assertEquals(3000, $cart->total());
+    }
 }
