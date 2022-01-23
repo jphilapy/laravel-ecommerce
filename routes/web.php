@@ -19,10 +19,16 @@ Route::get('/cart', 'CartController@index');
 Route::post('/orders', 'OrdersController@store');
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+
+//social media
+Route::get('{any}', 'SocialMediaController@index')
+    ->where('any', '.*')
+    ->middleware('auth')
+    ->name('social-media');
