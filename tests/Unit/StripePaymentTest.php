@@ -36,16 +36,9 @@ class StripePaymentTest extends TestCase
             'source' => $token->id
         ]);
 
-//        $payment->charge(1000, $token->id);
+        $payment->charge(1000, $token->id, $customer);
 
-       $charge = $stripe->charges->create([
-            'amount' => 1000,
-            'currency' => 'usd',
-
-            'description' => 'working through tutorial - ' . date('h:i:s'),
-           'customer' => $customer->id
-        ]);
-
-        $this->assertEquals(1000, $charge->amount_captured);
+        $this->assertEquals(1000, $payment->total());
     }
+
 }

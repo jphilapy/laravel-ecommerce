@@ -7,17 +7,27 @@ use Stripe\StripeClient;
 
 class StripePayment implements PaymentContract
 {
+    private $total;
 
-    public function charge($total, $token)
+    public function charge($total, $token, $customer)
     {
         $stripe = new StripeClient(
             env('STRIPE_SECRET')
         );
 
-        $stripe->charges->create([
-            'amount' => $total,
+        $charge = $stripe->charges->create([
+            'amount' => 1000,
             'currency' => 'usd',
-            'source' => $token,
+
+            'description' => 'working through tutorial - ' . date('h:i:s'),
+            'customer' => $customer->id
         ]);
+
+        $this->total = $charge->amount_captured;
+    }
+
+    public function total()
+    {
+        return $this->total;
     }
 }
