@@ -44,7 +44,7 @@
                                     @csrf
 
                                     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                            data-key="{{ env('STRIPE_SECRET') }}"
+                                            data-key="pk_test_85W90f41kwDdk8DDSl5s1NNs"
                                             data-amount="{{ $cart->total() }}"
                                             data-name="Cart"
                                             data-description="Test Purchase"
