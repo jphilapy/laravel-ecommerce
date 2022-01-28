@@ -14,11 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/products', 'ProductsController@index');
+
 Route::put('/cart/{product}', 'CartController@update');
 Route::get('/cart', 'CartController@index');
 Route::post('/orders', 'OrdersController@store');
+
+Route::get('/budget/transactions', 'Budget\TransactionsController@index');
 
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
