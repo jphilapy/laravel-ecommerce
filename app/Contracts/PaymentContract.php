@@ -3,5 +3,5 @@
 namespace App\Contracts;
 
 interface PaymentContract {
-    public function charge($total, $token, $customer);
+    public function charge($total, $token);
 }
