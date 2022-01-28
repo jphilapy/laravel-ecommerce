@@ -19,7 +19,7 @@ Route::put('/cart/{product}', 'CartController@update');
 Route::get('/cart', 'CartController@index');
 Route::post('/orders', 'OrdersController@store');
 
-Route::get('/budget/transactions', 'Budget\TransactionsController@index');
+Route::get('/budget/transactions/{category?}', 'Budget\TransactionsController@index');
 
 
 Route::get('/', function () {
