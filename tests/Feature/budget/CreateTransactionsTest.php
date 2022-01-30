@@ -46,6 +46,7 @@ class CreateTransactionsTest extends TestCase
         $transaction = factory(Transaction::class)->make(['category_id' => null]);
 
         $resp = $this->withoutExceptionHandling()->post('/budget/transactions', $transaction->toArray())
+            ->assertStatus(422)
             ->assertSee('The category id field is required.');
     }
 
@@ -58,6 +59,7 @@ class CreateTransactionsTest extends TestCase
         $transaction = factory(Transaction::class)->make(['amount' => null]);
 
         $resp = $this->withoutExceptionHandling()->post('/budget/transactions', $transaction->toArray())
+            ->assertStatus(422)
             ->assertSee('The amount field is required.');
     }
 
@@ -69,6 +71,7 @@ class CreateTransactionsTest extends TestCase
         $transaction = factory(Transaction::class)->make(['amount' => 'abc']);
 
         $resp = $this->withoutExceptionHandling()->post('/budget/transactions', $transaction->toArray())
+            ->assertStatus(422)
             ->assertSee('The amount format is invalid.');
     }
 }
