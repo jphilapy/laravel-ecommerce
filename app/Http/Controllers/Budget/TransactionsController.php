@@ -21,6 +21,7 @@ class TransactionsController extends Controller
 
         $validator = Validator::make($request->all(), [
             'description' => 'required',
+            'amount' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'category_id' => 'required'
         ]);
 
