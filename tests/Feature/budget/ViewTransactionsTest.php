@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\budget;
 
+use App\Models\Budget\Category;
 use App\Models\Budget\Transaction;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -34,6 +35,21 @@ class ViewTransactionsTest extends TestCase
             ->get('/budget/transactions')
             ->assertSee($transaction->description)
             ->assertSee($transaction->category->name);
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_filter_transactions_by_category()
+    {
+        $category = factory(Category::class)->create();
+        $transaction = factory(Transaction::class)->create(['category_id'=>$category->id]);
+        $otherTransaction = factory(Transaction::class)->create();
+
+        $this->get('/budget/transactions/' . $category->slug)
+            ->assertSee($transaction->description)
+            ->assertDontSee($otherTransaction->description);
+
     }
 
     /**
