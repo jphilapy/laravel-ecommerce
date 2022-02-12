@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Validator;
 
 class TransactionsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Category $category)
     {
         $transactions = Transaction::byCategory($category)->get();

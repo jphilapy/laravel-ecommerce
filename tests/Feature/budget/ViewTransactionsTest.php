@@ -13,6 +13,22 @@ class ViewTransactionsTest extends TestCase
     /**
      * @test
      */
+    public function it_allows_only_authenticated_users(): void
+    {
+
+        $this->withoutExceptionHandling();
+
+        $response = $this->get('/budget/transactions');
+
+            // ->assertRedirect('login')
+
+            $this->withExceptionHandling();
+            $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
     public function it_can_display_all_transactions()
     {
         $transaction = create(Transaction::class);
