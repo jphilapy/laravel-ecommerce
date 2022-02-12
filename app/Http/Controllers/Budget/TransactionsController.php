@@ -13,9 +13,9 @@ class TransactionsController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Category $category)
     {
-        $transactions = Transaction::all();
+        $transactions = Transaction::byCategory($category)->get();
         return view('budget.transactions.index', compact('transactions'));
     }
 }

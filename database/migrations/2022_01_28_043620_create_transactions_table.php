@@ -17,6 +17,7 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->string('description');
             $table->unsignedInteger('category_id');
+            $table->unsignedInteger('user_id');
             $table->timestamps();
         });
     }
