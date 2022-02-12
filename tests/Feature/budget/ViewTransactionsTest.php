@@ -5,12 +5,13 @@ namespace Tests\Feature\budget;
 use App\Models\Budget\Category;
 use App\Models\Budget\Transaction;
 use App\User;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ViewTransactionsTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
     /**
      * @test
      */
