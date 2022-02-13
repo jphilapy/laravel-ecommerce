@@ -14,26 +14,31 @@ class TransactionsController extends Controller
     {
         $this->middleware('auth');
     }
+
     public function index(Category $category)
     {
-        $transactions = Transaction::byCategory($category)->get();
 
+        $transactions = Transaction::byCategory($category)->get();
         return view('budget.transactions.index', compact('transactions'));
     }
 
-    public function store(Request $request){
+    public function create()
+    {
+        $categories = Category::all();
+        return view('budget.transactions.create', compact('categories'));
+    }
 
-        $validator = Validator::make($request->all(), [
-            'description' => 'required',
-            'amount' => 'required|regex:/^\d+(\.\d{1,2})?$/',
-            'category_id' => 'required'
+    public function store()
+    {
+
+        $this->validate(request(), [
+            'description'=>'required',
+            'category_id' => 'required',
+            'amount' => 'required|numeric'
         ]);
 
-        if($validator->fails()){
-            return response($validator->errors(), 422);
-        }
 
-        Transaction::create($request->all());
+        Transaction::create(request()->all());
         return redirect('/budget/transactions');
     }
 }
