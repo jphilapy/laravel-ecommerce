@@ -17,9 +17,6 @@ class ViewTransactionsTest extends TestCase
      */
     public function it_allows_only_authenticated_users()
     {
-//        $user = factory(User::class)->create();
-//        ->actingAs($user)
-
         $this->get('/budget/transactions')
             ->assertRedirect('/login');
     }
@@ -29,8 +26,8 @@ class ViewTransactionsTest extends TestCase
      */
     public function it_can_display_all_transactions()
     {
-        $transaction = factory(Transaction::class)->create();
         $user = factory(User::class)->create();
+        $transaction = factory(Transaction::class)->create();
 
         $this->actingAs($user)
             ->get('/budget/transactions')
@@ -43,11 +40,14 @@ class ViewTransactionsTest extends TestCase
      */
     public function it_can_filter_transactions_by_category()
     {
+        $user = factory(User::class)->create();
+
         $category = factory(Category::class)->create();
         $transaction = factory(Transaction::class)->create(['category_id'=>$category->id]);
         $otherTransaction = factory(Transaction::class)->create();
 
-        $this->get('/budget/transactions/' . $category->slug)
+        $this->actingAs($user)
+            ->get('/budget/transactions/' . $category->slug)
             ->assertSee($transaction->description)
             ->assertDontSee($otherTransaction->description);
 
@@ -69,7 +69,8 @@ class ViewTransactionsTest extends TestCase
             ['user_id' => $otheruser->id]
         );
 
-        $this->get('/budget/transactions')
+        $this->actingAs($user)
+            ->get('/budget/transactions')
             ->assertSee($transaction->description)
             ->assertDontSee($othertransaction->description);
 

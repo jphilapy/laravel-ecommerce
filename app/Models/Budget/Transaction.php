@@ -21,7 +21,7 @@ class Transaction extends Model
 
     public function scopeByCategory($query, Category $category)
     {
-        if($category) {
+        if($category->id) {
             $query->where('category_id', $category->id);
         }
 
