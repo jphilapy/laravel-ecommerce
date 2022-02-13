@@ -21,6 +21,12 @@ class TransactionsController extends Controller
         return view('budget.transactions.index', compact('transactions'));
     }
 
+    public function create()
+    {
+        $categories = Category::all();
+        return view('budget.transactions.create', compact('categories'));
+    }
+
     public function store()
     {
 

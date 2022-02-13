@@ -1,4 +1,6 @@
 @extends('layouts/app')
+
+@section('content')
 <div class="container">
     <div class="table-responsive">
         <table class="table">
@@ -9,13 +11,17 @@
                 <th>Amount</th>
             </thead>
             <tbody>
+
                 @foreach($transactions as $transaction)
-                    <tr>{{ $transaction->created_at->format('m/d/Y') }}</tr>
-                    <tr>{{ $transaction->description }}</tr>
-                    <tr>{{ $transaction->category->name }}</tr>
-                    <tr>{{ $transaction->amount }}</tr>
+                    <tr>
+                    <td>{{ $transaction->created_at->format('m/d/Y') }}</td>
+                    <td>{{ $transaction->description }}</td>
+                    <td>{{ $transaction->category->name }}</td>
+                    <td>{{ $transaction->amount }}</td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
 </div>
+@endsection
