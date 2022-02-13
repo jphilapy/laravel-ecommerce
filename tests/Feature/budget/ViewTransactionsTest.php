@@ -27,7 +27,7 @@ class ViewTransactionsTest extends TestCase
     public function it_can_display_all_transactions()
     {
         $user = factory(User::class)->create();
-        $transaction = factory(Transaction::class)->create();
+        $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
 
         $this->actingAs($user)
             ->get('/budget/transactions')
@@ -43,7 +43,10 @@ class ViewTransactionsTest extends TestCase
         $user = factory(User::class)->create();
 
         $category = factory(Category::class)->create();
-        $transaction = factory(Transaction::class)->create(['category_id'=>$category->id]);
+        $transaction = factory(Transaction::class)->create([
+            'user_id'=> $user->id,
+            'category_id'=>$category->id
+        ]);
         $otherTransaction = factory(Transaction::class)->create();
 
         $this->actingAs($user)
@@ -60,11 +63,12 @@ class ViewTransactionsTest extends TestCase
     public function it_only_displays_transactions_that_belong_to_the_currently_logged_in_user()
     {
         $user = factory(User::class)->create();
+        $otheruser = factory(User::class)->create();
+
         $transaction = factory(Transaction::class)->create(
             ['user_id' => $user->id]
         );
 
-        $otheruser = factory(User::class)->create();
         $othertransaction = factory(Transaction::class)->create(
             ['user_id' => $otheruser->id]
         );

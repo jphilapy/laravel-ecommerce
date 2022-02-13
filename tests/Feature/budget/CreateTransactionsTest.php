@@ -19,7 +19,7 @@ class CreateTransactionsTest extends TestCase
     public function it_can_create_transactions()
     {
         $user = factory(User::class)->create();
-        $transaction = factory(Transaction::class)->make();
+        $transaction = factory(Transaction::class)->make(['user_id'=>$user->id]);
 
         $this->withoutExceptionHandling();
         $response = $this->actingAs($user)

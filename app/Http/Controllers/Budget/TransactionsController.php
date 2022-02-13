@@ -16,7 +16,7 @@ class TransactionsController extends Controller
 
     public function index(Category $category)
     {
-        //byCategory($category)->
+
         $transactions = Transaction::byCategory($category)->get();
         return view('budget.transactions.index', compact('transactions'));
     }
