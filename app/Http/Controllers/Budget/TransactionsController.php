@@ -41,4 +41,11 @@ class TransactionsController extends Controller
         Transaction::create(request()->all());
         return redirect('/budget/transactions');
     }
+
+    public function update(Transaction $transaction)
+    {
+        dd($transaction->id);
+//        $transaction->update(request()->all());
+//        return redirect('/budget/transactions');
+    }
 }
