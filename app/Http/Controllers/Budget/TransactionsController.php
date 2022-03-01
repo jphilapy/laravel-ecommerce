@@ -17,7 +17,6 @@ class TransactionsController extends Controller
 
     public function index(Category $category)
     {
-
         $transactions = Transaction::byCategory($category)->get();
         return view('budget.transactions.index', compact('transactions'));
     }
@@ -25,7 +24,14 @@ class TransactionsController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('budget.transactions.create', compact('categories'));
+        $transaction = new Transaction();
+        return view('budget.transactions.create', compact('categories', 'transaction'));
+    }
+
+    public function edit(Transaction $transaction)
+    {
+        $categories = Category::all();
+        return view('budget.transactions.edit', compact('categories', 'transaction'));
     }
 
     public function store()
@@ -44,8 +50,14 @@ class TransactionsController extends Controller
 
     public function update(Transaction $transaction)
     {
-        dd($transaction->id);
-//        $transaction->update(request()->all());
-//        return redirect('/budget/transactions');
+
+        $this->validate(request(), [
+            'description'=>'required',
+            'category_id' => 'required',
+            'amount' => 'required|numeric'
+        ]);
+
+        $transaction->where('id', $transaction->id)->update(request()->all());
+        return redirect('/budget/transactions');
     }
 }

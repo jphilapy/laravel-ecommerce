@@ -16,18 +16,80 @@ class UpdateTransactionsTest extends TestCase
      */
     public function it_can_update_transactions()
     {
-        $this->withoutExceptionHandling();
+        $this->withExceptionHandling();
 
         $user = factory(User::class)->create();
-        $transaction = factory(Transaction::class)->create();
-        $newTransaction = factory(Transaction::class)->make();
+        $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
+        $newTransaction = factory(Transaction::class)->make(['user_id'=>$user->id]);
 
         $this->actingAs($user)
             ->put("/budget/transactions/{$transaction->id}", $newTransaction->toArray())
-            ->assertRedirect('/budget/transactions');
+        ;
 
-//        $this->actingAs($user)
-//            ->get('/budget/transactions')
-//            ->assertSee($newTransaction->description);
+        $this->get('/budget/transactions')
+            ->assertSee($newTransaction->description);
+    }
+
+    /**
+     * @test
+     */
+    public function it_cannot_update_transactions_without_a_description()
+    {
+        $user = factory(User::class)->create();
+        $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
+        $newTransaction = factory(Transaction::class)->make(['description' => null]);
+
+        $response = $this->actingAs($user)
+            ->withExceptionHandling()
+            ->put("/budget/transactions/{$transaction->id}", $newTransaction->toArray())
+            ->assertSessionHasErrors('description');
+    }
+
+    /**
+     * @test
+     */
+
+    public function it_cannot_update_transactions_without_a_category()
+    {
+        $user = factory(User::class)->create();
+        $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
+        $newTransaction = factory(Transaction::class)->make(['category_id' => null]);
+
+        $response = $this->actingAs($user)
+            ->withExceptionHandling()
+            ->put("/budget/transactions/{$transaction->id}", $newTransaction->toArray())
+            ->assertSessionHasErrors('category_id');
+    }
+
+    /**
+     * @test
+     */
+
+    public function it_cannot_update_transactions_without_an_amount()
+    {
+        $user = factory(User::class)->create();
+        $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
+        $newTransaction = factory(Transaction::class)->make(['amount' => null]);
+
+        $response = $this->actingAs($user)
+            ->withExceptionHandling()
+            ->put("/budget/transactions/{$transaction->id}", $newTransaction->toArray())
+            ->assertSessionHasErrors('amount');
+    }
+
+    /**
+     * @test
+     */
+
+    public function it_cannot_update_transactions_without_a_numerical_amount()
+    {
+        $user = factory(User::class)->create();
+        $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
+        $newTransaction = factory(Transaction::class)->make(['amount' => 'abc']);
+
+        $response = $this->actingAs($user)
+            ->withExceptionHandling()
+            ->put("/budget/transactions/{$transaction->id}", $newTransaction->toArray())
+            ->assertSessionHasErrors('amount');
     }
 }

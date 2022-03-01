@@ -6,11 +6,12 @@
             <div class="col-md-8 offset-md-2">
                 <div class="card">
                     <div class="card-header">
-                        Create Transaction
+                        Update Transaction
                     </div>
                     <div class="card-body">
-                        <form action="/budget/transactions" method="POST" class="requires-validation" novalidate>
-                          @include('budget.transactions.form')
+                        <form action="/budget/transactions/{{$transaction->id}}" method="POST" class="requires-validation" novalidate>
+                            {{method_field('PUT')}}
+                            @include('budget.transactions.form', ['buttonText'=>'Update'])
                         </form>
                     </div>
                 </div>
