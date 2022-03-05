@@ -17,7 +17,7 @@ class TransactionsController extends Controller
 
     public function index(Category $category)
     {
-        $transactions = Transaction::byCategory($category)->get();
+        $transactions = Transaction::byCategory($category)->paginate(3);
         return view('budget.transactions.index', compact('transactions'));
     }
 
@@ -58,6 +58,12 @@ class TransactionsController extends Controller
         ]);
 
         $transaction->where('id', $transaction->id)->update(request()->all());
+        return redirect('/budget/transactions');
+    }
+
+    public function destroy(Transaction $transaction)
+    {
+        $transaction->delete();
         return redirect('/budget/transactions');
     }
 }

@@ -21,11 +21,20 @@
                             <td><a href="/budget/transactions/edit/{{$transaction->id}}">{{ $transaction->description }}</a></td>
                             <td>{{ $transaction->category->name }}</td>
                             <td>{{ $transaction->amount }}</td>
-                            <td>{{ $transaction->amount }}</td>
+                            <td>
+                                <form action="/budget/transactions/{{$transaction->id}}" method="POST">
+                                    {{ method_field('DELETE') }}
+                                    @csrf
+
+                                    <button class="btn btn-danger btn-xs" type="submit">Delete</button>
+
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+                {{ $transactions->links() }}
             </div>
         </div>
     </div>
