@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Budget;
 use App\Http\Controllers\Controller;
 use App\Models\Budget\Category;
 use App\Models\Budget\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,7 +18,16 @@ class TransactionsController extends Controller
 
     public function index(Category $category)
     {
-        $transactions = Transaction::byCategory($category)->paginate(3);
+        $transactionsQuery = Transaction::byCategory($category);
+
+        if(request()->has('month')) {
+            $transactionsQuery
+                ->where('created_at', '>=',  Carbon::parse('first day of ' . request('month')))
+                ->where('created_at', '<=', Carbon::parse('last day of ' . request('month')));
+        }
+
+        $transactions = $transactionsQuery->paginate();
+
         return view('budget.transactions.index', compact('transactions'));
     }
 

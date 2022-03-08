@@ -5,6 +5,7 @@ namespace Tests\Feature\budget;
 use App\Models\Budget\Category;
 use App\Models\Budget\Transaction;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -78,5 +79,22 @@ class ViewTransactionsTest extends TestCase
             ->assertSee($transaction->description)
             ->assertDontSee($othertransaction->description);
 
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_filter_transactions_by_month()
+    {
+        $user = factory(User::class)->create();
+        $currentTransaction = factory(Transaction::class)->create();
+        $pastTransaction = factory(Transaction::class)->create(
+            ['user_id' => $user->id, 'created_at' => Carbon::now()->subMonth(2)]
+        );
+
+        $this->actingAs($user)
+            ->get('/budget/transactions?month=' . Carbon::now()->subMonth(2)->format('M'))
+            ->assertSee($pastTransaction->description)
+            ->assertDontSee($currentTransaction->description);
     }
 }

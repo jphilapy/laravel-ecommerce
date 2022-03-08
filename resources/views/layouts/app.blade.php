@@ -35,6 +35,16 @@
                     <ul class="navbar-nav mr-auto">
                         <li><a href="/budget/transactions">All Transations</a></li>
                         <li><a href="/budget/transactions/create">New Transation</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                Categories <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                @foreach(\App\Models\Budget\Category::all() as $category)
+                                    <li><a href="/budget/transactions/{{ $category->slug }}">{{ $category->name }}</a></li>
+                                @endforeach
+                            </ul>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
