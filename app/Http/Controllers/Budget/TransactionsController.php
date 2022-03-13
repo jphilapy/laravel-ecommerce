@@ -19,16 +19,18 @@ class TransactionsController extends Controller
     public function index(Category $category)
     {
         $transactionsQuery = Transaction::byCategory($category);
+        $currentMonth = request('month') ?: Carbon::now()->format('M');
+
 
         if(request()->has('month')) {
-            $transactionsQuery
-                ->where('created_at', '>=',  Carbon::parse('first day of ' . request('month')))
-                ->where('created_at', '<=', Carbon::parse('last day of ' . request('month')));
+            $transactionsQuery->byMonth(request('month'));
+        } else {
+            $transactionsQuery->byMonth();
         }
 
         $transactions = $transactionsQuery->paginate();
 
-        return view('budget.transactions.index', compact('transactions'));
+        return view('budget.transactions.index', compact('transactions', 'currentMonth'));
     }
 
     public function create()

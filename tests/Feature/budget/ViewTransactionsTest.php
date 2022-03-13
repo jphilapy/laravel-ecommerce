@@ -97,4 +97,22 @@ class ViewTransactionsTest extends TestCase
             ->assertSee($pastTransaction->description)
             ->assertDontSee($currentTransaction->description);
     }
+
+    /**
+     * @test
+     */
+    public function it_can_filter_transactions_by_current_month_by_default()
+    {
+        $user = factory(User::class)->create();
+        $currentTransaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
+        $pastTransaction = factory(Transaction::class)->create(
+            ['user_id' => $user->id, 'created_at' => Carbon::now()->subMonth(2)]
+        );
+
+        $this->actingAs($user)
+            ->get('/budget/transactions/')
+            ->assertSee($currentTransaction->description)
+            ->assertDontSee($pastTransaction->description)
+        ;
+    }
 }
