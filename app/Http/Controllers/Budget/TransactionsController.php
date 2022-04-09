@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Budget\Category;
 use App\Models\Budget\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionsController extends Controller
 {
@@ -17,7 +18,7 @@ class TransactionsController extends Controller
     public function index(Category $category)
     {
 
-        $transactions = Transaction::byCategory($category)->get();
+        $transactions = Transaction::byCategory($category)->where('user_id', Auth::user()->id)->get();
         return view('budget.transactions.index', compact('transactions'));
     }
 
