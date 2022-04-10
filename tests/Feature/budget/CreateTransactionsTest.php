@@ -26,7 +26,7 @@ class CreateTransactionsTest extends TestCase
             ->post('/budget/transactions', $transaction->toArray())
             ->assertRedirect('/budget/transactions');
 
-        $this->get('/budget/transactions')
+        $this->get('/budget/show-transactions')
             ->assertSee($transaction->description);
     }
 

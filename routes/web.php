@@ -19,11 +19,12 @@ Route::put('/cart/{product}', 'CartController@update');
 Route::get('/cart', 'CartController@index');
 Route::post('/orders', 'OrdersController@store');
 
-//Route::get('/budget/transactions/create', 'Budget\TransactionsController@create');
-//Route::get('/budget/transactions/{transaction}', 'Budget\TransactionsController@edit');
-//Route::get('/budget/transactions/{category?}', 'Budget\TransactionsController@index');
+Route::get('/budget/transactions/create', 'Budget\TransactionsController@create');
+Route::get('/budget/show-transactions/{category?}', 'Budget\TransactionsController@index');
+Route::get('/budget/transactions/{transaction}', 'Budget\TransactionsController@edit');
+
 Route::post('/budget/transactions', 'Budget\TransactionsController@store');
-//Route::put('/budget/transactions/{transaction}', 'Budget\TransactionsController@update');
+Route::put('/budget/transactions/{transaction}', 'Budget\TransactionsController@update');
 
 
 Route::get('/', function () {

@@ -17,7 +17,7 @@ class ViewTransactionsTest extends TestCase
      */
     public function it_allows_only_authenticated_users()
     {
-        $this->get('/budget/transactions')
+        $this->get('/budget/show-transactions')
             ->assertRedirect('/login');
     }
 
@@ -49,10 +49,10 @@ class ViewTransactionsTest extends TestCase
         ]);
 
 //        dd($category);
-        $otherTransaction = factory(Transaction::class)->create(['user_id'=>99]);
+        $otherTransaction = factory(Transaction::class)->create(['user_id'=>99, 'category_id'=>$category->id]);
 
         $this->actingAs($user)
-            ->get('/budget/transactions/category/' . $category->slug)
+            ->get('/budget/show-transactions/' . $category->slug)
             ->assertSee($transaction->description)
             ->assertDontSee($otherTransaction->description);
 
@@ -76,7 +76,7 @@ class ViewTransactionsTest extends TestCase
         );
 
         $this->actingAs($user)
-            ->get('/budget/transactions')
+            ->get('/budget/show-transactions')
             ->assertSee($transaction->description)
             ->assertDontSee($othertransaction->description);
 

@@ -28,7 +28,7 @@ class UpdateTransactionsTest extends TestCase
 ;
 
         $this->actingAs($user)
-            ->get('/budget/transactions')
+            ->get('/budget/show-transactions')
             ->assertSee($newTransaction->description)
 ;
     }
