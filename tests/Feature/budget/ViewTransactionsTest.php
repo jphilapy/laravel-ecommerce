@@ -47,10 +47,12 @@ class ViewTransactionsTest extends TestCase
             'user_id'=> $user->id,
             'category_id'=>$category->id
         ]);
-        $otherTransaction = factory(Transaction::class)->create();
+
+//        dd($category);
+        $otherTransaction = factory(Transaction::class)->create(['user_id'=>99]);
 
         $this->actingAs($user)
-            ->get('/budget/transactions/' . $category->slug)
+            ->get('/budget/transactions/category/' . $category->slug)
             ->assertSee($transaction->description)
             ->assertDontSee($otherTransaction->description);
 
