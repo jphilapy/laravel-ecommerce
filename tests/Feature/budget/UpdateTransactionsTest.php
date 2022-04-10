@@ -17,8 +17,8 @@ class UpdateTransactionsTest extends TestCase
     public function it_can_update_transactions()
     {
         $user = factory(User::class)->create();
-        $transaction = factory(Transaction::class)->create();
-        $newTransaction = factory(Transaction::class)->make();
+        $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
+        $newTransaction = factory(Transaction::class)->make(['user_id'=>$user->id]);
 
         $this->withoutExceptionHandling();
 
@@ -29,6 +29,7 @@ class UpdateTransactionsTest extends TestCase
 
         $this->actingAs($user)
             ->get('/budget/transactions')
-            ->assertSee($newTransaction->description);
+            ->assertSee($newTransaction->description)
+;
     }
 }
