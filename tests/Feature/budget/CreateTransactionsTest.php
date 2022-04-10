@@ -24,7 +24,7 @@ class CreateTransactionsTest extends TestCase
         $this->withoutExceptionHandling();
         $response = $this->actingAs($user)
             ->post('/budget/transactions', $transaction->toArray())
-            ->assertRedirect('/budget/transactions');
+            ->assertRedirect('/budget/show-transactions');
 
         $this->get('/budget/show-transactions')
             ->assertSee($transaction->description);

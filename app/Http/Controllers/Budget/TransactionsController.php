@@ -18,7 +18,7 @@ class TransactionsController extends Controller
     public function index(Category $category)
     {
 
-        $transactions = Transaction::byCategory($category)->where('user_id', Auth::user()->id)->get();
+        $transactions = Transaction::byCategory($category)->where('user_id', Auth::user()->id)->paginate();
         return view('budget.transactions.index', compact('transactions'));
     }
 
@@ -41,7 +41,7 @@ class TransactionsController extends Controller
 
         Transaction::create(request()->all());
 
-        return redirect('/budget/transactions');
+        return redirect('/budget/show-transactions');
     }
 
     public function update(Transaction $transaction)
@@ -56,12 +56,18 @@ class TransactionsController extends Controller
 
         $transaction->update(request()->all());
 
-        return redirect('/budget/transactions');
+        return redirect('/budget/show-transactions');
     }
 
     public function edit(Transaction $transaction)
     {
         $categories = Category::all();
         return view('budget.transactions.edit', compact('categories','transaction'));
+    }
+
+    public function destroy(Transaction $transaction)
+    {
+        $transaction->delete();
+        return redirect('/budget/show-transactions');
     }
 }

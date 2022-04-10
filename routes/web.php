@@ -25,7 +25,7 @@ Route::get('/budget/transactions/{transaction}', 'Budget\TransactionsController@
 
 Route::post('/budget/transactions', 'Budget\TransactionsController@store');
 Route::put('/budget/transactions/{transaction}', 'Budget\TransactionsController@update');
-
+Route::delete('/budget/transactions/{transaction}','Budget\TransactionsController@destroy');
 
 Route::get('/', function () {
     return view('welcome');

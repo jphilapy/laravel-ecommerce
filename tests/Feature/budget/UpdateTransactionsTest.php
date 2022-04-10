@@ -24,7 +24,7 @@ class UpdateTransactionsTest extends TestCase
 
         $this->actingAs($user)
             ->put("/budget/transactions/{$transaction->id}", $newTransaction->toArray())
-            ->assertRedirect('/budget/transactions')
+            ->assertRedirect('/budget/show-transactions')
 ;
 
         $this->actingAs($user)
