@@ -31,6 +31,7 @@ class ViewTransactionsTest extends TestCase
         $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
 
         $this->actingAs($user)
+            ->withoutExceptionHandling()
             ->get('/budget/transactions')
             ->assertSee($transaction->description)
             ->assertSee($transaction->category->name);
@@ -51,6 +52,7 @@ class ViewTransactionsTest extends TestCase
         $otherTransaction = factory(Transaction::class)->create();
 
         $this->actingAs($user)
+            ->withoutExceptionHandling()
             ->get('/budget/transactions/' . $category->slug)
             ->assertSee($transaction->description)
             ->assertDontSee($otherTransaction->description);
@@ -75,6 +77,7 @@ class ViewTransactionsTest extends TestCase
         );
 
         $this->actingAs($user)
+            ->withoutExceptionHandling()
             ->get('/budget/transactions')
             ->assertSee($transaction->description)
             ->assertDontSee($othertransaction->description);
@@ -93,6 +96,7 @@ class ViewTransactionsTest extends TestCase
         );
 
         $this->actingAs($user)
+            ->withoutExceptionHandling()
             ->get('/budget/transactions?month=' . Carbon::now()->subMonth(2)->format('M'))
             ->assertSee($pastTransaction->description)
             ->assertDontSee($currentTransaction->description);
@@ -110,6 +114,7 @@ class ViewTransactionsTest extends TestCase
         );
 
         $this->actingAs($user)
+            ->withoutExceptionHandling()
             ->get('/budget/transactions/')
             ->assertSee($currentTransaction->description)
             ->assertDontSee($pastTransaction->description)
