@@ -16,7 +16,7 @@ class UpdateTransactionsTest extends TestCase
      */
     public function it_can_update_transactions()
     {
-        $this->withOutExceptionHandling();
+//        $this->withOutExceptionHandling();
 
         $user = factory(User::class)->create();
         $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);

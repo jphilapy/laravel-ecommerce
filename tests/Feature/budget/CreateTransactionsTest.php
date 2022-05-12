@@ -20,12 +20,13 @@ class CreateTransactionsTest extends TestCase
         $user = factory(User::class)->create();
         $transaction = factory(Transaction::class)->make(['user_id'=>$user->id]);
 
-        $this->withoutExceptionHandling();
+//        $this->withoutExceptionHandling();
         $response = $this->actingAs($user)
             ->post('/budget/transactions', $transaction->toArray())
             ->assertRedirect('/budget/transactions');
 
-        $this->get('/budget/transactions')
+        $this->actingAs($user)
+            ->get('/budget/transactions')
             ->assertSee($transaction->description);
     }
 

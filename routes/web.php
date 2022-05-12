@@ -29,6 +29,7 @@ Route::put('/budget/transactions/{transaction}', 'Budget\TransactionsController@
 
 // categories
 Route::get('/budget/categories', 'Budget\CategoriesController@index');
+Route::post('/budget/categories', 'Budget\CategoriesController@store');
 
 Route::delete('/budget/transactions/{transaction}', 'Budget\TransactionsController@destroy');
 

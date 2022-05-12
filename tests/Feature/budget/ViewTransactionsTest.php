@@ -16,7 +16,7 @@ class ViewTransactionsTest extends TestCase
     /**
      * @test
      */
-    public function it_allows_only_authenticated_users()
+    public function it_allows_only_authenticated_users_to_the_transactions_list()
     {
         $this->get('/budget/transactions')
             ->assertRedirect('/login');
@@ -31,7 +31,7 @@ class ViewTransactionsTest extends TestCase
         $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
 
         $this->actingAs($user)
-            ->withoutExceptionHandling()
+            ->withExceptionHandling()
             ->get('/budget/transactions')
             ->assertSee($transaction->description)
             ->assertSee($transaction->category->name);
