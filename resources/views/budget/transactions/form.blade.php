@@ -10,14 +10,14 @@
 
 <div class="form-group">
     <label for="amount">Amount</label>
-    <input type="number" name="amount" class="form-control {{ $errors->has('description') ? 'is-invalid' : ''  }}"
+    <input type="number" name="amount" class="form-control {{ $errors->has('amount') ? 'is-invalid' : ''  }}"
            value="{{ old('amount') ?: $transaction->amount }}">
-    {{ $errors->has('description') ? 'Missing amount' : ''  }}
+    {{ $errors->has('amount') ? 'Missing amount' : ''  }}
 </div>
 
 <div class="form-group">
     <label for="category_id">Category</label>
-    <select name="category_id" class="form-control {{ $errors->has('description') ? 'is-invalid' : ''  }}">
+    <select name="category_id" class="form-control {{ $errors->has('category_id') ? 'is-invalid' : ''  }}">
         <option value=""></option>
         @foreach($categories as $category)
             <option
@@ -26,7 +26,7 @@
             </option>
         @endforeach
     </select>
-    {{ $errors->has('description') ? 'Missing category' : ''  }}
+    {{ $errors->has('category_id') ? 'Missing category' : ''  }}
 </div>
 
 <button class="btn btn-success" type="submit">{{ isset($buttonText) ? $buttonText : 'Save' }}</button>

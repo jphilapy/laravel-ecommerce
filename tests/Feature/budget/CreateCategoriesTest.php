@@ -31,4 +31,18 @@ class CreateCategoriesTest extends TestCase
             ->get('/budget/categories')
             ->assertSee($category->name);
     }
+
+    /**
+     * @test
+     */
+    public function it_cannot_create_categories_without_a_name()
+    {
+        $user = factory(User::class)->create();
+        $category = factory(Transaction::class)->make(['name' => null]);
+
+        $response = $this->actingAs($user)
+            ->withExceptionHandling()
+            ->post('/budget/categories', $category->toArray())
+            ->assertSessionHasErrors('name');
+    }
 }

@@ -20,7 +20,17 @@ class CategoriesController extends Controller
 
     public function store()
     {
+        $this->validate(request(), [
+            'name'=>'required',
+        ]);
+
         Category::create(request()->all());
         return redirect('/budget/categories');
+    }
+
+    public function create()
+    {
+        $category = new Category();
+        return view('budget.categories.create', compact('category'));
     }
 }
