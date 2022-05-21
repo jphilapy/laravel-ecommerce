@@ -52,4 +52,10 @@ class CategoriesController extends Controller
     {
         return view('budget.categories.edit', compact('category'));
     }
+
+    public function destroy(Category $category)
+    {
+        $category->delete();
+        return redirect('/budget/categories');
+    }
 }

@@ -18,7 +18,7 @@ class ViewCategoriesTest extends TestCase
     public function it_can_display_all_categories()
     {
         $user = factory(User::class)->create();
-        $category = factory(Category::class)->create();
+        $category = factory(Category::class)->create(['user_id'=>$user->id]);
 
         $this->actingAs($user)
             ->withoutExceptionHandling()

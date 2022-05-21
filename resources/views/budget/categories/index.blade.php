@@ -22,7 +22,7 @@
                                 <td><a href="/budget/categories/{{$category->slug}}">{{ $category->name }}</a></td>
                                 <td>{{ $category->slug }}</td>
                                 <td>
-                                    <form action="/budget/categories/{{$category->id}}" method="POST">
+                                    <form action="/budget/categories/{{$category->slug}}" method="POST">
                                         {{ method_field('DELETE') }}
                                         @csrf
 

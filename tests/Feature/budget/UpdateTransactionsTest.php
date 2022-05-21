@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Budget\Category;
 use App\Models\Budget\Transaction;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -19,8 +20,9 @@ class UpdateTransactionsTest extends TestCase
 //        $this->withOutExceptionHandling();
 
         $user = factory(User::class)->create();
+        $category = factory(Category::class)->create(['user_id'=>$user->id]);
         $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
-        $newTransaction = factory(Transaction::class)->make(['user_id'=>$user->id]);
+        $newTransaction = factory(Transaction::class)->make(['user_id'=>$user->id, 'category_id'=>$category->id]);
 
         $this->actingAs($user)
             ->put("/budget/transactions/{$transaction->id}", $newTransaction->toArray())

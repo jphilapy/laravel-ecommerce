@@ -3,7 +3,7 @@
 namespace App\Models\Budget;
 
 use Illuminate\Database\Eloquent\Model;
-use Str;
+use Illuminate\Support\Str;
 
 class Category extends Model
 {
@@ -20,6 +20,10 @@ class Category extends Model
         static::saving(function($category){
             $category->user_id = $category->user_id ?: auth()->id();
             $category->slug = $category->slug ?: Str::slug($category->name);
+        });
+
+        static::updating(function($category) {
+            $category->slug = Str::slug($category->name);
         });
     }
 

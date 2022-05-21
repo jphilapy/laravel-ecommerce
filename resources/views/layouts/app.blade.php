@@ -33,13 +33,24 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li><a href="/budget/transactions">All Transations</a></li>
-                        <li><a href="/budget/transactions/create">New Transation</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                Transactions <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="/budget/transactions">All Transations</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/budget/transactions/create">New Transation</a></li>
+                            </ul>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 Categories <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="/budget/categories">Manage Categories</a></li>
+                                <li><a href="/budget/categories/create">New Category</a></li>
+                                <li role="separator" class="divider"></li>
                                 @foreach(\App\Models\Budget\Category::all() as $category)
                                     <li><a href="/budget/categories/{{ $category->slug }}">{{ $category->name }}</a></li>
                                 @endforeach
