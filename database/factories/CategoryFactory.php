@@ -5,6 +5,7 @@
 use App\Models\Budget\Category;
 use App\User;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 $factory->define(Category::class, function (Faker $faker) {
     $name = $faker->word;

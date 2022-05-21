@@ -19,7 +19,7 @@
                         @foreach($categories as $category)
                             <tr>
                                 <td>{{ $category->created_at->format('m/d/Y') }}</td>
-                                <td><a href="/budget/categories/edit/{{$category->id}}">{{ $category->name }}</a></td>
+                                <td><a href="/budget/categories/{{$category->slug}}">{{ $category->name }}</a></td>
                                 <td>{{ $category->slug }}</td>
                                 <td>
                                     <form action="/budget/categories/{{$category->id}}" method="POST">

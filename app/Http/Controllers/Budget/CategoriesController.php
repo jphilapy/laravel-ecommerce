@@ -14,12 +14,14 @@ class CategoriesController extends Controller
 
     public function index()
     {
+
         $categories = Category::paginate();
         return view('budget.categories.index', compact('categories'));
     }
 
     public function store()
     {
+
         $this->validate(request(), [
             'name'=>'required',
         ]);
@@ -30,7 +32,24 @@ class CategoriesController extends Controller
 
     public function create()
     {
+
         $category = new Category();
         return view('budget.categories.create', compact('category'));
+    }
+
+    public function update(Category $category)
+    {
+
+        $this->validate(request(), [
+            'name'=>'required',
+        ]);
+
+        $category->update(request()->all());
+        return redirect('/budget/categories');
+    }
+
+    public function edit(Category $category)
+    {
+        return view('budget.categories.edit', compact('category'));
     }
 }

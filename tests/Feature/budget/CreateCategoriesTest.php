@@ -38,7 +38,7 @@ class CreateCategoriesTest extends TestCase
     public function it_cannot_create_categories_without_a_name()
     {
         $user = factory(User::class)->create();
-        $category = factory(Transaction::class)->make(['name' => null]);
+        $category = factory(Category::class)->make(['name' => null]);
 
         $response = $this->actingAs($user)
             ->withExceptionHandling()

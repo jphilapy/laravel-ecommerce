@@ -26,13 +26,16 @@ Route::get('/budget/transactions/create', 'Budget\TransactionsController@create'
 Route::get('/budget/transactions/{category?}', 'Budget\TransactionsController@index');
 Route::post('/budget/transactions', 'Budget\TransactionsController@store');
 Route::put('/budget/transactions/{transaction}', 'Budget\TransactionsController@update');
+Route::delete('/budget/transactions/{transaction}', 'Budget\TransactionsController@destroy');
 
 // categories
 Route::get('/budget/categories/create', 'Budget\CategoriesController@create');
 Route::post('/budget/categories', 'Budget\CategoriesController@store');
 Route::get('/budget/categories', 'Budget\CategoriesController@index');
+Route::put('/budget/categories/{category}', 'Budget\CategoriesController@update');
+Route::get('/budget/categories/{category}', 'Budget\CategoriesController@edit');
 
-Route::delete('/budget/transactions/{transaction}', 'Budget\TransactionsController@destroy');
+
 
 
 

@@ -41,7 +41,7 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 @foreach(\App\Models\Budget\Category::all() as $category)
-                                    <li><a href="/budget/transactions/{{ $category->slug }}">{{ $category->name }}</a></li>
+                                    <li><a href="/budget/categories/{{ $category->slug }}">{{ $category->name }}</a></li>
                                 @endforeach
                             </ul>
                         </li>
