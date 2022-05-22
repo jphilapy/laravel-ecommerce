@@ -30,7 +30,8 @@ Route::resource('/budget/categories', 'Budget\CategoriesController', ['except'=>
 // budgets
 Route::resource('/budget/budgets', 'Budget\BudgetsController');
 
-
+// video
+Route::resource('/video/channels', 'Video\ChannelsController');
 
 Route::get('/', function () {
     return view('welcome');
