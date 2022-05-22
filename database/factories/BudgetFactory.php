@@ -16,6 +16,6 @@ $factory->define(Budget::class, function (Faker $faker) {
             return factory(User::class)->create()->id;
         },
         'amount'=>$faker->randomFloat(2,500, 1000),
-        'budget_date'=>\Carbon\Carbon::now()
+        'budget_date'=>\Carbon\Carbon::now()->format('M')
     ];
 });

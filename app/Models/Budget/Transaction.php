@@ -13,7 +13,7 @@ class Transaction extends Model
         parent::boot();
 
         static::addGlobalScope('user', function($query) {
-            $query->where('user_id', auth()->id());
+            $query->where('user_id', auth()->id())->with('category');
         });
 
         // automatically save user id when creating new transaction

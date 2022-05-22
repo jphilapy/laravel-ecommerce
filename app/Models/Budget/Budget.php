@@ -7,9 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Budget extends Model
 {
-    public $guarded = [];
+    public $fillable = ['category_id', 'amount', 'budget_date'];
 
-    public $amount;
+    public static function boot() {
+        parent::boot();
+
+        static::addGlobalScope('user', function($query) {
+            $query->where('user_id', auth()->id())->with('category.transactions');
+        });
+
+        // automatically save user id when creating new transaction
+        static::saving(function($budget){
+            $budget->user_id = $budget->user_id ?: auth()->id();
+            $budget->budget_date = Carbon::parse($budget->budget_date)->toDateTimeString();
+        });
+    }
 
     public function category()
     {
@@ -21,9 +33,14 @@ class Budget extends Model
         return $this->amount - $this->category->transactions->sum('amount');
     }
 
+    public function getMonth()
+    {
+        return isset($this->budget_date) ? Carbon::parse($this->budget_date)->format('M') : null;
+    }
+
     public function scopeByMonth($query, $month = 'this month')
     {
-        $query->where('budget_date', '>=', Carbon::parse("first day of {$month}"))
+        return $query->where('budget_date', '>=', Carbon::parse("first day of {$month}"))
             ->where('budget_date', '<=', Carbon::parse("last day of {$month}"));
     }
 }
