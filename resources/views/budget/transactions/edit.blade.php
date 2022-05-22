@@ -9,8 +9,13 @@
                         Update Transaction
                     </div>
                     <div class="card-body">
+<<<<<<< HEAD
                         <form action="/budget/transactions/{{ $transaction->id }}" method="POST" class="requires-validation" novalidate>
                            {{ method_field('PUT') }}
+=======
+                        <form action="/budget/transactions/{{$transaction->id}}" method="POST" class="requires-validation" novalidate>
+                            {{method_field('PUT')}}
+>>>>>>> tdd-laravel-budget
                             @include('budget.transactions.form', ['buttonText'=>'Update'])
                         </form>
                     </div>

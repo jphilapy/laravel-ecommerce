@@ -6,15 +6,11 @@
             <div class="col-md-8 offset-md-2">
                 <div class="card">
                     <div class="card-header">
-                        Create Transaction
+                        Create Budget
                     </div>
                     <div class="card-body">
-                        <form action="/budget/transactions" method="POST" class="requires-validation" novalidate>
-<<<<<<< HEAD
-                            @include('budget.transactions.form')
-=======
-                          @include('budget.transactions.form')
->>>>>>> tdd-laravel-budget
+                        <form action="/budget/budgets" method="POST" class="requires-validation" novalidate>
+                          @include('budget.budgets.form')
                         </form>
                     </div>
                 </div>

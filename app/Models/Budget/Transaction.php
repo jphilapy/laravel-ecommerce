@@ -2,12 +2,14 @@
 
 namespace App\Models\Budget;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
     public $fillable = ['description', 'amount', 'category_id', 'user_id'];
 
+<<<<<<< HEAD
 //    public static function boot() {
 //        parent::boot();
 //
@@ -20,6 +22,20 @@ class Transaction extends Model
 //            $transaction->user_id = $transaction->user_id ?: auth()->id();
 //        });
 //    }
+=======
+    public static function boot() {
+        parent::boot();
+
+        static::addGlobalScope('user', function($query) {
+            $query->where('user_id', auth()->id())->with('category');
+        });
+
+        // automatically save user id when creating new transaction
+        static::saving(function($transaction){
+            $transaction->user_id = $transaction->user_id ?: auth()->id();
+        });
+    }
+>>>>>>> tdd-laravel-budget
 
     public function category()
     {
@@ -32,5 +48,11 @@ class Transaction extends Model
             $query->where('category_id', $category->id);
         }
 
+    }
+
+    public function scopeByMonth($query, $month = 'this month')
+    {
+        $query->where('created_at', '>=', Carbon::parse("first day of {$month}"))
+        ->where('created_at', '<=', Carbon::parse("last day of {$month}"));
     }
 }

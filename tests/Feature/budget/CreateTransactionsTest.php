@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\budget;
 
+use App\Models\Budget\Category;
 use App\Models\Budget\Transaction;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+
 use Tests\TestCase;
 
 class CreateTransactionsTest extends TestCase
@@ -19,14 +19,20 @@ class CreateTransactionsTest extends TestCase
     public function it_can_create_transactions()
     {
         $user = factory(User::class)->create();
-        $transaction = factory(Transaction::class)->make(['user_id'=>$user->id]);
+        $category = factory(Category::class)->create(['user_id'=>$user->id]);
+        $transaction = factory(Transaction::class)->make(['category_id'=>$category->id,'user_id'=>$user->id]);
 
-        $this->withoutExceptionHandling();
+//        $this->withoutExceptionHandling();
         $response = $this->actingAs($user)
             ->post('/budget/transactions', $transaction->toArray())
             ->assertRedirect('/budget/show-transactions');
 
+<<<<<<< HEAD
         $this->get('/budget/show-transactions')
+=======
+        $this->actingAs($user)
+            ->get('/budget/transactions')
+>>>>>>> tdd-laravel-budget
             ->assertSee($transaction->description);
     }
 

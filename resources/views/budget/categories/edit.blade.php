@@ -6,15 +6,12 @@
             <div class="col-md-8 offset-md-2">
                 <div class="card">
                     <div class="card-header">
-                        Create Transaction
+                        Update Category
                     </div>
                     <div class="card-body">
-                        <form action="/budget/transactions" method="POST" class="requires-validation" novalidate>
-<<<<<<< HEAD
-                            @include('budget.transactions.form')
-=======
-                          @include('budget.transactions.form')
->>>>>>> tdd-laravel-budget
+                        <form action="/budget/categories/{{ $category->slug }}" method="POST" class="requires-validation" novalidate>
+                           {{method_field('PUT')}}
+                            @include('budget.categories.form', ['buttonText'=>'Update'])
                         </form>
                     </div>
                 </div>
