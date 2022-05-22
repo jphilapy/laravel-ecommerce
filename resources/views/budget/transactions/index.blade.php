@@ -34,27 +34,13 @@
                     <th>Description</th>
                     <th>Category</th>
                     <th>Amount</th>
-<<<<<<< HEAD
-                    <th>Remove</th>
-=======
                     <th>Action</th>
->>>>>>> tdd-laravel-budget
                     </thead>
                     <tbody>
 
                     @foreach($transactions as $transaction)
                         <tr>
                             <td>{{ $transaction->created_at->format('m/d/Y') }}</td>
-<<<<<<< HEAD
-                            <td><a href="/budget/transactions/{{$transaction->id}}">{{ $transaction->description }}</a></td>
-                            <td>{{ $transaction->category->name }}</td>
-                            <td>{{ $transaction->amount }}</td>
-                            <td>
-                                <form action="/budget/transactions/{{ $transaction->id }}" method="post">
-                                    {{ method_field('DELETE') }}
-                                    @csrf
-                                    <button class="btn btn-danger btn-xs" type="submit">Remove</button>
-=======
                             <td><a href="/budget/transactions/{{$transaction->id}}/edit">{{ $transaction->description }}</a></td>
                             <td>{{ $transaction->category->name }}</td>
                             <td>{{ $transaction->amount }}</td>
@@ -65,7 +51,6 @@
 
                                     <button class="btn btn-danger btn-xs" type="submit">Delete</button>
 
->>>>>>> tdd-laravel-budget
                                 </form>
                             </td>
                         </tr>

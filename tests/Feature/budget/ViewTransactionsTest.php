@@ -18,7 +18,7 @@ class ViewTransactionsTest extends TestCase
      */
     public function it_allows_only_authenticated_users_to_the_transactions_list()
     {
-        $this->get('/budget/show-transactions')
+        $this->get('/budget/transactions')
             ->assertRedirect('/login');
     }
 

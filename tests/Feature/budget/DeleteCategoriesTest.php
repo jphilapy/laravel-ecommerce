@@ -24,7 +24,7 @@ class DeleteCategoriesTest extends TestCase
             ->withoutExceptionHandling()->delete("/budget/categories/{$category->slug}")
             ->assertRedirect("/budget/categories");
 
-        $this->get("/budget/categories")
+        $this->actingAs($user)->get("/budget/categories")
             ->assertDontSee($category->name);
     }
 }

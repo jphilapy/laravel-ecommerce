@@ -1,10 +1,6 @@
 @csrf
 
 <div class="form-group">
-<<<<<<< HEAD
-    <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-=======
->>>>>>> tdd-laravel-budget
     <label for="description">Description</label>
     <input type="text" name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : ''  }}"
            value="{{ old('description') ?: $transaction->description }}">
@@ -14,15 +10,9 @@
 
 <div class="form-group">
     <label for="amount">Amount</label>
-<<<<<<< HEAD
-    <input type="number" name="amount" class="form-control {{ $errors->has('description') ? 'is-invalid' : ''  }}"
-           value="{{ old('amount') ?: $transaction->amount }}">
-    {{ $errors->has('description') ? 'Missing amount' : ''  }}
-=======
     <input type="number" name="amount" class="form-control {{ $errors->has('amount') ? 'is-invalid' : ''  }}"
            value="{{ old('amount') ?: $transaction->amount }}">
     {{ $errors->has('amount') ? 'Missing amount' : ''  }}
->>>>>>> tdd-laravel-budget
 </div>
 
 <div class="form-group">

@@ -28,6 +28,9 @@ class UpdateTransactionsTest extends TestCase
             ->put("/budget/transactions/{$transaction->id}", $newTransaction->toArray())
         ;
 
+        $this->get('/budget/transactions')
+            ->assertSee($newTransaction->name);
+
     }
 
     /**

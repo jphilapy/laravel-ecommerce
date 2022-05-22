@@ -10,11 +10,7 @@
                     </div>
                     <div class="card-body">
                         <form action="/budget/transactions" method="POST" class="requires-validation" novalidate>
-<<<<<<< HEAD
-                            @include('budget.transactions.form')
-=======
                           @include('budget.transactions.form')
->>>>>>> tdd-laravel-budget
                         </form>
                     </div>
                 </div>

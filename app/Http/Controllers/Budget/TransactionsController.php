@@ -61,7 +61,7 @@ class TransactionsController extends Controller
 
         Transaction::create(request()->all());
 
-        return redirect('/budget/show-transactions');
+        return redirect('/budget/transactions');
     }
 
     public function update(Transaction $transaction)
@@ -76,14 +76,14 @@ class TransactionsController extends Controller
 
         $transaction->update(request()->all());
 
-        return redirect('/budget/show-transactions');
+        return redirect('/budget/transactions');
     }
 
 
     public function destroy(Transaction $transaction)
     {
         $transaction->delete();
-        return redirect('/budget/show-transactions');
+        return redirect('/budget/transactions');
     }
 
 }
