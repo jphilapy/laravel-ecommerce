@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\budget;
 
 use App\Models\Budget\Category;
 use App\Models\Budget\Transaction;

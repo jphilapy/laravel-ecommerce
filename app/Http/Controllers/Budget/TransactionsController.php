@@ -25,7 +25,7 @@ class TransactionsController extends Controller
         if(request()->has('month')) {
             $transactionsQuery->byMonth(request('month'));
         } else {
-            $transactionsQuery->byMonth();
+            $transactionsQuery->byMonth('this month');
         }
 
         $transactions = $transactionsQuery->paginate();

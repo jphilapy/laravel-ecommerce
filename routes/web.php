@@ -27,6 +27,9 @@ Route::get('/budget/transactions/{category?}', 'Budget\TransactionsController@in
 // categories
 Route::resource('/budget/categories', 'Budget\CategoriesController', ['except'=>['show']]);
 
+// budgets
+Route::resource('/budget/budgets', 'Budget\BudgetsController');
+
 
 
 Route::get('/', function () {
