@@ -17,73 +17,6 @@ class UpdateTransactionsTest extends TestCase
      */
     public function it_can_update_transactions()
     {
-<<<<<<< HEAD
-        $user = factory(User::class)->create();
-        $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
-        $newTransaction = factory(Transaction::class)->make(['user_id'=>$user->id]);
-
-        $this->withoutExceptionHandling();
-
-        $this->actingAs($user)
-            ->put("/budget/transactions/{$transaction->id}", $newTransaction->toArray())
-            ->assertRedirect('/budget/show-transactions')
-;
-
-        $this->actingAs($user)
-            ->get('/budget/show-transactions')
-            ->assertSee($newTransaction->description)
-;
-    }
-
-
-    /**
-     * @test
-     */
-    public function it_cannot_update_transactions_without_a_description()
-    {
-        $user = factory(User::class)->create();
-        $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
-        $newTransaction = factory(Transaction::class)->make(['user_id'=>$user->id, 'description'=>null]);
-
-
-        $this->actingAs($user)
-            ->put("/budget/transactions/{$transaction->id}", $newTransaction->toArray())
-            ->assertSessionHasErrors('description')
-        ;
-
-    }
-
-    /**
-     * @test
-     */
-    public function it_cannot_update_transactions_without_a_category()
-    {
-        $user = factory(User::class)->create();
-        $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
-        $newTransaction = factory(Transaction::class)->make(['user_id'=>$user->id, 'category_id'=>null]);
-
-
-        $this->actingAs($user)
-            ->put("/budget/transactions/{$transaction->id}", $newTransaction->toArray())
-            ->assertSessionHasErrors('category_id')
-        ;
-
-    }
-
-    /**
-     * @test
-     */
-    public function it_cannot_update_transactions_without_a_valid_amount()
-    {
-        $user = factory(User::class)->create();
-        $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
-        $newTransaction = factory(Transaction::class)->make(['user_id'=>$user->id, 'amount'=>null]);
-
-
-        $this->actingAs($user)
-            ->put("/budget/transactions/{$transaction->id}", $newTransaction->toArray())
-            ->assertSessionHasErrors('amount')
-=======
 //        $this->withOutExceptionHandling();
 
         $user = factory(User::class)->create();
@@ -93,7 +26,6 @@ class UpdateTransactionsTest extends TestCase
 
         $this->actingAs($user)
             ->put("/budget/transactions/{$transaction->id}", $newTransaction->toArray())
->>>>>>> tdd-laravel-budget
         ;
 
     }

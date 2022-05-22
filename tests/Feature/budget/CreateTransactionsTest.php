@@ -27,12 +27,8 @@ class CreateTransactionsTest extends TestCase
             ->post('/budget/transactions', $transaction->toArray())
             ->assertRedirect('/budget/show-transactions');
 
-<<<<<<< HEAD
-        $this->get('/budget/show-transactions')
-=======
         $this->actingAs($user)
             ->get('/budget/transactions')
->>>>>>> tdd-laravel-budget
             ->assertSee($transaction->description);
     }
 

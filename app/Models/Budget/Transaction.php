@@ -9,20 +9,6 @@ class Transaction extends Model
 {
     public $fillable = ['description', 'amount', 'category_id', 'user_id'];
 
-<<<<<<< HEAD
-//    public static function boot() {
-//        parent::boot();
-//
-//        static::addGlobalScope('user', function($query) {
-//            $query->where('user_id', auth()->id());
-//        });
-//
-//        // automatically save user id when creating new transaction
-//        static::saving(function($transaction){
-//            $transaction->user_id = $transaction->user_id ?: auth()->id();
-//        });
-//    }
-=======
     public static function boot() {
         parent::boot();
 
@@ -35,7 +21,6 @@ class Transaction extends Model
             $transaction->user_id = $transaction->user_id ?: auth()->id();
         });
     }
->>>>>>> tdd-laravel-budget
 
     public function category()
     {

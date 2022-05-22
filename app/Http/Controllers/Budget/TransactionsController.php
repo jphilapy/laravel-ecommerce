@@ -6,12 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Budget\Category;
 use App\Models\Budget\Transaction;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-<<<<<<< HEAD
-use Illuminate\Support\Facades\Auth;
-=======
-use Illuminate\Support\Facades\Validator;
->>>>>>> tdd-laravel-budget
+
 
 class TransactionsController extends Controller
 {
@@ -25,10 +20,7 @@ class TransactionsController extends Controller
         $transactionsQuery = Transaction::byCategory($category);
         $currentMonth = request('month') ?: Carbon::now()->format('M');
 
-<<<<<<< HEAD
-        $transactions = Transaction::byCategory($category)->where('user_id', Auth::user()->id)->paginate();
-        return view('budget.transactions.index', compact('transactions'));
-=======
+
 
         if(request()->has('month')) {
             $transactionsQuery->byMonth(request('month'));
@@ -39,7 +31,7 @@ class TransactionsController extends Controller
         $transactions = $transactionsQuery->paginate();
 
         return view('budget.transactions.index', compact('transactions', 'currentMonth'));
->>>>>>> tdd-laravel-budget
+
     }
 
     public function create()
@@ -47,15 +39,14 @@ class TransactionsController extends Controller
         $categories = Category::all();
         $transaction = new Transaction();
         return view('budget.transactions.create', compact('categories', 'transaction'));
-<<<<<<< HEAD
-=======
+
     }
 
     public function edit(Transaction $transaction)
     {
         $categories = Category::all();
         return view('budget.transactions.edit', compact('categories', 'transaction'));
->>>>>>> tdd-laravel-budget
+
     }
 
     public function store()
@@ -100,22 +91,4 @@ class TransactionsController extends Controller
         return redirect('/budget/show-transactions');
     }
 
-    public function update(Transaction $transaction)
-    {
-
-        $this->validate(request(), [
-            'description'=>'required',
-            'category_id' => 'required',
-            'amount' => 'required|numeric'
-        ]);
-
-        $transaction->where('id', $transaction->id)->update(request()->all());
-        return redirect('/budget/transactions');
-    }
-
-    public function destroy(Transaction $transaction)
-    {
-        $transaction->delete();
-        return redirect('/budget/transactions');
-    }
 }
