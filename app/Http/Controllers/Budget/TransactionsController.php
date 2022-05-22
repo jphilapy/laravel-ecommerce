@@ -79,11 +79,6 @@ class TransactionsController extends Controller
         return redirect('/budget/show-transactions');
     }
 
-    public function edit(Transaction $transaction)
-    {
-        $categories = Category::all();
-        return view('budget.transactions.edit', compact('categories','transaction'));
-    }
 
     public function destroy(Transaction $transaction)
     {

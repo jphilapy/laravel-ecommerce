@@ -55,12 +55,8 @@ class ViewTransactionsTest extends TestCase
         $otherTransaction = factory(Transaction::class)->create(['user_id'=>99, 'category_id'=>$category->id]);
 
         $this->actingAs($user)
-<<<<<<< HEAD
-            ->get('/budget/show-transactions/' . $category->slug)
-=======
             ->withoutExceptionHandling()
             ->get('/budget/transactions/' . $category->slug)
->>>>>>> tdd-laravel-budget
             ->assertSee($transaction->description)
             ->assertDontSee($otherTransaction->description);
 
@@ -91,12 +87,8 @@ class ViewTransactionsTest extends TestCase
         );
 
         $this->actingAs($user)
-<<<<<<< HEAD
-            ->get('/budget/show-transactions')
-=======
             ->withoutExceptionHandling()
             ->get('/budget/transactions')
->>>>>>> tdd-laravel-budget
             ->assertSee($transaction->description)
             ->assertDontSee($othertransaction->description);
 
