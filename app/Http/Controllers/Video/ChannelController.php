@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Video;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\Video\Channel;
 use Illuminate\Http\Request;
 
 class ChannelController extends Controller
@@ -48,9 +49,9 @@ class ChannelController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit()
+    public function edit(Channel $channel)
     {
-
+        return view('video.channel.edit', compact('channel'));
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Video\ChannelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,3 +41,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+// LIVEWIRE STUFF
+Route::get('/test', function() {
+    return view('test');
+});
+
+
+Route::middleware('auth')->group(function(){
+    Route::get('/video/channel/{channel}/edit', [ChannelController::class, 'edit'])->name('channel.edit');
+
+});
