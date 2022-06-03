@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Video\ChannelController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/products', 'ProductsController@index');
 
@@ -32,21 +35,18 @@ Route::resource('/budget/categories', 'Budget\CategoriesController', ['except'=>
 Route::resource('/budget/budgets', 'Budget\BudgetsController');
 
 // video
-Route::resource('/video/channels', 'Video\ChannelsController');
+Route::resource('/video/channels', ChannelController::class);
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 
 // LIVEWIRE STUFF
-Route::get('/test', function() {
-    return view('test');
-});
+//Route::get('/test', function() {
+//    return view('test');
+//});
 
 
 Route::middleware('auth')->group(function(){
