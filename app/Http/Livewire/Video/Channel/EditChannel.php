@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Video\Channel;
 
 use App\Models\Video\Channel;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Image;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -51,8 +52,18 @@ class EditChannel extends Component
         if($this->image) {
             // save image
             $image = $this->image->storeAs('images', $this->channel->uid . '.png');
+
+            $imageImage = explode("/", $image)[1]; //resize and convert to png
+
+            $img = Image::make(storage_path().'/app/' . $image)
+                ->encode('png')
+                ->fit(80, 80, function($constraint){
+                $constraint->upsize();
+            })->save();
+
+
             $this->channel->update([
-                'image' => $image
+                'image' => $imageImage
             ]);
         }
 
