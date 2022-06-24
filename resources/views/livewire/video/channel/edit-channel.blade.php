@@ -27,6 +27,25 @@
             {{$message}}
         </div>
         @enderror
+
+        <div class="form-group">
+            <input type="file" wire:model="image">
+        </div>
+
+        <div class="form-group">
+            @if ($image)
+                Photo Preview:
+                <img src="{{ $image->temporaryUrl() }}" class="img-thumbnail">
+            @endif
+        </div>
+
+        @error('image')
+        <div class="alert alert-danger">
+            {{$message}}
+        </div>
+        @enderror
+
+
         <div class="form-group">
            <button type="submit" class="btn btn-success">Update</button>
         </div>
