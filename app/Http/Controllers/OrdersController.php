@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
-use Illuminate\Http\Request;
 use App\Contracts\PaymentContract;
-use App\FakePayment;
 use App\Cart;
 
 class OrdersController extends Controller

@@ -35,7 +35,8 @@ Route::resource('/budget/categories', 'Budget\CategoriesController', ['except'=>
 Route::resource('/budget/budgets', 'Budget\BudgetsController');
 
 // video
-Route::resource('/video/channels', ChannelController::class);
+//Route::resource('/video/channels', ChannelController::class);
+Route::resource('/video/channels', 'Video\ChannelController');
 
 
 Auth::routes();
@@ -51,5 +52,4 @@ Auth::routes();
 
 Route::middleware('auth')->group(function(){
     Route::get('/video/channel/{channel}/edit', [ChannelController::class, 'edit'])->name('channel.edit');
-
 });
