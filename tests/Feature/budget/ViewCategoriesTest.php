@@ -3,6 +3,7 @@
 namespace Tests\Feature\budget;
 
 use App\Models\Budget\Category;
+use App\Models\Video\Channel;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
@@ -17,6 +18,7 @@ class ViewCategoriesTest extends TestCase
     public function it_can_display_all_categories()
     {
         $user = factory(User::class)->create();
+        factory(Channel::class)->create(['user_id'=>$user->id]);
         $category = factory(Category::class)->create(['user_id'=>$user->id]);
 
         $this->actingAs($user)
@@ -41,6 +43,7 @@ class ViewCategoriesTest extends TestCase
     public function it_only_displays_categories_that_belong_to_the_currently_logged_in_user()
     {
         $user = factory(User::class)->create();
+        factory(Channel::class)->create(['user_id'=>$user->id]);
         $otheruser = factory(User::class)->create();
 
         $category = factory(Category::class)->create(

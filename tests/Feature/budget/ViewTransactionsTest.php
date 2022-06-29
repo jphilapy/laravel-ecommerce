@@ -4,6 +4,7 @@ namespace Tests\Feature\budget;
 
 use App\Models\Budget\Category;
 use App\Models\Budget\Transaction;
+use App\Models\Video\Channel;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -44,7 +45,7 @@ class ViewTransactionsTest extends TestCase
     public function it_can_filter_transactions_by_category()
     {
         $user = factory(User::class)->create();
-
+        factory(Channel::class)->create(['user_id'=>$user->id]);
         $category = factory(Category::class)->create(['user_id'=>$user->id]);
         $transaction = factory(Transaction::class)->create([
             'user_id'=> $user->id,
@@ -71,6 +72,7 @@ class ViewTransactionsTest extends TestCase
 
 
         $user = factory(User::class)->create();
+        factory(Channel::class)->create(['user_id'=>$user->id]);
         $category = factory(Category::class)->create(['user_id'=>$user->id]);
 
         $otheruser = factory(User::class)->create();
@@ -100,6 +102,7 @@ class ViewTransactionsTest extends TestCase
     public function it_can_filter_transactions_by_month()
     {
         $user = factory(User::class)->create();
+        factory(Channel::class)->create(['user_id'=>$user->id]);
         $category = factory(Category::class)->create(['user_id'=>$user->id]);
 
         $currentTransaction = factory(Transaction::class)->create();
@@ -120,6 +123,7 @@ class ViewTransactionsTest extends TestCase
     public function it_can_filter_transactions_by_current_month_by_default()
     {
         $user = factory(User::class)->create();
+        factory(Channel::class)->create(['user_id'=>$user->id]);
         $category = factory(Category::class)->create(['user_id'=>$user->id]);
 
         $currentTransaction = factory(Transaction::class)->create(['category_id'=>$category->id,'user_id'=>$user->id]);

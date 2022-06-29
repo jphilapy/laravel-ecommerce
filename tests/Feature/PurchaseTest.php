@@ -22,13 +22,14 @@ class PurchaseTest extends TestCase
         $product = factory(Product::class)->create([
             'price' => 1000
         ]);
-
+;
         $cart = new Cart();
         $cart->add($product, $product->id);
 
         $payment = new FakePayment();
 
         $this->app->instance(PaymentContract::class, $payment);
+        $this->withoutExceptionHandling();
 
         $this->post('/orders', [
             'stripeEmail' => 'test@email.com',

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Channel extends Model
 {
-    public $fillable = ['name','slug','uid','description','image'];
+    public $guarded = [];
 
     public function getRouteKeyName()
     {
