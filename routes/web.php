@@ -30,7 +30,7 @@ Route::get('/budget/transactions/{category?}', 'Budget\TransactionsController@in
 
 // categories
 Route::resource('/budget/categories', 'Budget\CategoriesController', ['except'=>['show']]);
-
+Route::get('/budget/categories/{category?}', 'Budget\CategoriesController@index');
 // budgets
 Route::resource('/budget/budgets', 'Budget\BudgetsController');
 
