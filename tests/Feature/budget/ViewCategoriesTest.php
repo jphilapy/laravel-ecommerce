@@ -44,14 +44,14 @@ class ViewCategoriesTest extends TestCase
     {
         $user = factory(User::class)->create();
         factory(Channel::class)->create(['user_id'=>$user->id]);
-        $otheruser = factory(User::class)->create();
+
 
         $category = factory(Category::class)->create(
             ['user_id' => $user->id]
         );
 
         $otherCategory = factory(Category::class)->create(
-            ['user_id' => $otheruser->id]
+            ['user_id' => 99]
         );
 
         $this->actingAs($user)

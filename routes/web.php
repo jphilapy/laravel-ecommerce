@@ -51,5 +51,10 @@ Auth::routes();
 
 
 Route::middleware('auth')->group(function(){
-    Route::get('/video/channel/{channel}/edit', [ChannelController::class, 'edit'])->name('channel.edit');
+//    Route::get('/video/channel/{channel}/edit', [ChannelController::class, 'edit'])->name('channel.edit');
+    Route::get('/video/{channel}/create', [\App\Http\Livewire\Video\CreateVideo::class, '__invoke'])->name('video.create');
+    Route::get('/video/{channel}/{video}/edit', [\App\Http\Livewire\Video\EditVideo::class, '__invoke'])->name('video.edit');
+    Route::get('/video/{channel}', [\App\Http\Livewire\Video\AllVideos::class, '__invoke'])->name('video.all');
+
 });
+

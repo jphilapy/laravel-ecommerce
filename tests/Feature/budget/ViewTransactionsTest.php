@@ -102,6 +102,7 @@ class ViewTransactionsTest extends TestCase
     public function it_can_filter_transactions_by_month()
     {
         $user = factory(User::class)->create();
+
         factory(Channel::class)->create(['user_id'=>$user->id]);
         $category = factory(Category::class)->create(['user_id'=>$user->id]);
 
@@ -110,11 +111,13 @@ class ViewTransactionsTest extends TestCase
             ['category_id'=>$category->id,'user_id' => $user->id, 'created_at' => Carbon::now()->subMonth(2)]
         );
 
+
         $this->actingAs($user)
             ->withoutExceptionHandling()
             ->get('/budget/transactions?month=' . Carbon::now()->subMonth(2)->format('M'))
-            ->assertSee($pastTransaction->description)
-            ->assertDontSee($currentTransaction->description);
+                ->assertSee($pastTransaction->description)
+            ->assertDontSee($currentTransaction->description)
+        ;
     }
 
     /**

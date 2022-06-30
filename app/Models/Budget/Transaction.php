@@ -38,6 +38,6 @@ class Transaction extends Model
     public function scopeByMonth($query, $month = 'this month')
     {
         $query->where('created_at', '>=', Carbon::parse("first day of {$month}"))
-        ->where('created_at', '<=', Carbon::parse("last day of {$month}"));
+        ->orWhere('created_at', '<=', Carbon::parse("last day of {$month}"));
     }
 }
