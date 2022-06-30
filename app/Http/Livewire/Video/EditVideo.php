@@ -8,6 +8,7 @@ class EditVideo extends Component
 {
     public function render()
     {
-        return view('livewire.video.edit-video');
+        return view('livewire.video.edit-video')
+            ->extends('layouts.app');
     }
 }

@@ -8,6 +8,7 @@ class AllVideos extends Component
 {
     public function render()
     {
-        return view('livewire.video.all-videos');
+        return view('livewire.video.all-videos')
+            ->extends('layouts.app');
     }
 }
