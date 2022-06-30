@@ -131,7 +131,7 @@ class ViewTransactionsTest extends TestCase
 
         $currentTransaction = factory(Transaction::class)->create(['category_id'=>$category->id,'user_id'=>$user->id]);
         $pastTransaction = factory(Transaction::class)->create(
-            ['user_id' => $user->id, 'created_at' => Carbon::now()->subMonth(2)]
+            ['user_id' => 99, 'created_at' => Carbon::now()->subMonth(2)]
         );
 
         $this->actingAs($user)
