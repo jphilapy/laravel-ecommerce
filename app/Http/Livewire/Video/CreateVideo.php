@@ -31,14 +31,14 @@ class CreateVideo extends Component
 
     public function fileCompleted()
     {
-
+        dd('file upload completed');
     }
 
-    public function upload()
+/*    public function upload()
     {
 
        $this->validate([
            'videoFile' => 'required|mimes:mp4|max:102400',
        ]);
-    }
+    }*/
 }
