@@ -18,9 +18,9 @@
                             <input type="file" wire:model="videoFile">
                         </form>
                         @error('videoFile')
-                            <div class="alert alert-danger">
-                                {{$message}}
-                            </div>
+                        <div class="alert alert-danger">
+                            {{$message}}
+                        </div>
                         @enderror
                     </div>
                 </div>
