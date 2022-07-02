@@ -1,14 +1,19 @@
 <?php
+namespace Database\Factories;
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+use App\Models\Product;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-use App\Product;
-use Faker\Generator as Faker;
+class ProductFactory extends Factory
+{
+    protected $model = Product::class;
 
-$factory->define(Product::class , function (Faker $faker) {
-    return [
-    'name' => 'Test Product',
-    'description' => 'Test Description',
-    'price' => 1099
-    ];
-});
+    public function definition()
+    {
+        return [
+            'name' => 'Test Product',
+            'description' => 'Test Description',
+            'price' => 1099
+        ];
+    }
+}

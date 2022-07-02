@@ -3,13 +3,12 @@
 namespace Tests\Feature;
 
 use App\Cart;
-use App\Product;
-use App\Order;
-use App\FakePayment;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\Contracts\PaymentContract;
+use App\FakePayment;
+use App\Models\Order;
+use App\Models\Product;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\TestCase;
 
 class PurchaseTest extends TestCase
 {
@@ -19,7 +18,7 @@ class PurchaseTest extends TestCase
      */
     public function it_can_purchase_products()
     {
-        $product = factory(Product::class)->create([
+        $product = Product::factory()->create([
             'price' => 1000
         ]);
 ;
@@ -29,7 +28,7 @@ class PurchaseTest extends TestCase
         $payment = new FakePayment();
 
         $this->app->instance(PaymentContract::class, $payment);
-        $this->withoutExceptionHandling();
+
 
         $this->post('/orders', [
             'stripeEmail' => 'test@email.com',

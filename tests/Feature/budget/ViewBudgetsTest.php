@@ -5,7 +5,7 @@ namespace Tests\Feature\budget;
 use App\Models\Budget\Budget;
 use App\Models\Budget\Category;
 use App\Models\Video\Channel;
-use App\User;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;

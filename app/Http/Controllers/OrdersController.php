@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Order;
-use App\Contracts\PaymentContract;
 use App\Cart;
+use App\Contracts\PaymentContract;
+use App\Models\Order;
 
 class OrdersController extends Controller
 {

@@ -4,7 +4,7 @@ namespace Tests\Feature\budget;
 
 use App\Models\Budget\Category;
 use App\Models\Budget\Transaction;
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
