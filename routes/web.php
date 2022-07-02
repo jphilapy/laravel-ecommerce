@@ -1,6 +1,12 @@
 <?php
 
+use App\Http\Controllers\Budget\BudgetsController;
+use App\Http\Controllers\Budget\CategoriesController;
+use App\Http\Controllers\Budget\TransactionsController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\Video\ChannelController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,26 +14,26 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/home', [HomeController::class , 'index'])->name('home');
 
-Route::get('/products', 'ProductsController@index');
+Route::get('/products', [ProductsController::class, 'index']);
 
 
-Route::put('/cart/{product}', 'CartController@update');
-Route::get('/cart', 'CartController@index');
-Route::post('/orders', 'OrdersController@store');
+Route::put('/cart/{product}', [CartController::class, 'update']);
+Route::get('/cart', [CartController::class, 'index']);
+Route::post('/orders', [OrdersController::class, 'store']);
 
 // Budget transactions
-Route::resource('/budget/transactions', 'Budget\TransactionsController', ['except' => ['show']]);
-Route::get('/budget/transactions/{category?}', 'Budget\TransactionsController@index');
+Route::resource('/budget/transactions', TransactionsController::class, ['except' => ['show']]);
+Route::get('/budget/transactions/{category?}', [TransactionsController::class, 'index']);
 
 // categories
-Route::resource('/budget/categories', 'Budget\CategoriesController', ['except' => ['show']]);
-Route::get('/budget/categories/{category?}', 'Budget\CategoriesController@index');
+Route::resource('/budget/categories', CategoriesController::class, ['except' => ['show']]);
+Route::get('/budget/categories/{category?}', [CategoriesController::class, 'index']);
 // budgets
-Route::resource('/budget/budgets', 'Budget\BudgetsController');
+Route::resource('/budget/budgets', BudgetsController::class);
 
 // video
 //Route::resource('/video/channels', ChannelController::class);
-Route::resource('/video/channels', 'Video\ChannelController');
+Route::resource('/video/channels', ChannelController::class);
 
 
 Auth::routes();
