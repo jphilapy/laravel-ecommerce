@@ -15,12 +15,6 @@
                     @endif
 
                     {{ __('You are logged in!') }}
-
-                    <h3>Stuff</h3>
-                    <ul>
-                        <li><a href="/budget/transactions">Budget Stuff</a></li>
-                        <li><a href="/video/channel/test/edit">Video Channel Stuff</a></li>
-                    </ul>
                 </div>
             </div>
         </div>
