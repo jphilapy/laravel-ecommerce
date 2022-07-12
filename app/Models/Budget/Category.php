@@ -2,11 +2,14 @@
 
 namespace App\Models\Budget;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class Category extends Model
 {
+    use HasFactory;
+
     public $fillable = ['name', 'slug', 'user_id'];
 
     public static function boot() {

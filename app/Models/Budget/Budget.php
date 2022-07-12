@@ -3,10 +3,13 @@
 namespace App\Models\Budget;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Budget extends Model
 {
+    use HasFactory;
+
     public $fillable = ['category_id', 'amount', 'budget_date'];
 
     public static function boot() {

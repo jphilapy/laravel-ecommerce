@@ -18,9 +18,9 @@ class CreateTransactionsTest extends TestCase
      */
     public function it_can_create_transactions()
     {
-        $user = factory(User::class)->create();
-        $category = factory(Category::class)->create(['user_id'=>$user->id]);
-        $transaction = factory(Transaction::class)->make(['category_id'=>$category->id,'user_id'=>$user->id]);
+        $user = User::factory()->create();
+        $category = Category::factory()->create(['user_id'=>$user->id]);
+        $transaction = Transaction::factory()->make(['category_id'=>$category->id,'user_id'=>$user->id]);
 
 //        $this->withoutExceptionHandling();
         $response = $this->actingAs($user)
@@ -37,8 +37,8 @@ class CreateTransactionsTest extends TestCase
      */
     public function it_cannot_create_transactions_without_a_description()
     {
-        $user = factory(User::class)->create();
-        $transaction = factory(Transaction::class)->make(['description' => null]);
+        $user = User::factory()->create();
+        $transaction = Transaction::factory()->make(['description' => null]);
 
         $response = $this->actingAs($user)
             ->withExceptionHandling()
@@ -52,8 +52,8 @@ class CreateTransactionsTest extends TestCase
 
     public function it_cannot_create_transactions_without_a_category()
     {
-        $user = factory(User::class)->create();
-        $transaction = factory(Transaction::class)->make(['category_id' => null]);
+        $user = User::factory()->create();
+        $transaction = Transaction::factory()->make(['category_id' => null]);
 
         $response = $this->actingAs($user)
             ->withExceptionHandling()
@@ -67,8 +67,8 @@ class CreateTransactionsTest extends TestCase
 
     public function it_cannot_create_transactions_without_an_amount()
     {
-        $user = factory(User::class)->create();
-        $transaction = factory(Transaction::class)->make(['amount' => null]);
+        $user = User::factory()->create();
+        $transaction = Transaction::factory()->make(['amount' => null]);
 
         $response = $this->actingAs($user)
             ->withExceptionHandling()
@@ -82,8 +82,8 @@ class CreateTransactionsTest extends TestCase
 
     public function it_cannot_create_transactions_without_a_numerical_amount()
     {
-        $user = factory(User::class)->create();
-        $transaction = factory(Transaction::class)->make(['amount' => 'abc']);
+        $user = User::factory()->create();
+        $transaction = Transaction::factory()->make(['amount' => 'abc']);
 
         $response = $this->actingAs($user)
             ->withExceptionHandling()

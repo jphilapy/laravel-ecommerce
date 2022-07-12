@@ -17,10 +17,10 @@ class CreateBudgetsTest extends TestCase
      */
     public function it_can_create_budgets()
     {
-        $user = factory(User::class)->create();
-        factory(Channel::class)->create(['user_id'=>$user->id]);
-        $category = factory(Category::class)->create(['user_id'=>$user->id]);
-        $budget = factory(Budget::class)->make(['category_id'=>$category->id,'user_id'=>$user->id]);
+        $user = User::factory()->create();
+        Channel::factory()->create(['user_id'=>$user->id]);
+        $category = Category::factory()->create(['user_id'=>$user->id]);
+        $budget = Budget::factory()->make(['category_id'=>$category->id,'user_id'=>$user->id]);
 
         $this->withoutExceptionHandling();
         $response = $this->actingAs($user)

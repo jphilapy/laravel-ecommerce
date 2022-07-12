@@ -19,8 +19,8 @@ class CreateCategoriesTest extends TestCase
      */
     public function it_can_create_categories()
     {
-        $user = factory(User::class)->create();
-        $category = factory(Category::class)->make(['user_id'=>$user->id]);
+        $user = User::factory()->create();
+        $category = Category::factory()->make(['user_id'=>$user->id]);
 
 //        $this->withoutExceptionHandling();
         $response = $this->actingAs($user)
@@ -37,8 +37,8 @@ class CreateCategoriesTest extends TestCase
      */
     public function it_cannot_create_categories_without_a_name()
     {
-        $user = factory(User::class)->create();
-        $category = factory(Category::class)->make(['name' => null]);
+        $user = User::factory()->create();
+        $category = Category::factory()->make(['name' => null]);
 
         $response = $this->actingAs($user)
             ->withExceptionHandling()

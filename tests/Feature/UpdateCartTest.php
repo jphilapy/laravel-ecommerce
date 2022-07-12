@@ -14,7 +14,7 @@ class UpdateCartTest extends TestCase
      */
     public function it_can_update_cart_content()
     {
-        $product = factory(Product::class)->create();
+        $product = Product::factory()->create();
 
         /*
          *

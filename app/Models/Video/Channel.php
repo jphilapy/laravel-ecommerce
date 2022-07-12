@@ -3,10 +3,13 @@
 namespace App\Models\Video;
 
 use App\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Channel extends Model
 {
+    use HasFactory;
+
     public $guarded = [];
 
     public function getRouteKeyName()
