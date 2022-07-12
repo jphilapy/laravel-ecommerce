@@ -1,19 +1,22 @@
 <?php
+namespace Database\Factories;
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-
-use App\Models\Budget\Category;
 use App\User;
-use Faker\Generator as Faker;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Category::class, function (Faker $faker) {
-    $name = $faker->word;
-    return [
-        'name' => $name,
-        'slug' => Str::slug($name),
-        'user_id' => function () {
-            return factory(User::class)->create()->id;
-        }
-    ];
-});
+
+class CategoryFactory extends Factory
+{
+    public function definition()
+    {
+        $name = $this->faker->word;
+        return [
+            'name' => $name,
+            'slug' => Str::slug($name),
+            'user_id' => function () {
+                return User::factory()->create()->id;
+            }
+        ];
+    }
+}

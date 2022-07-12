@@ -1,21 +1,24 @@
 <?php
+namespace Database\Factories;
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-
-use App\Models\Budget\Budget;
 use App\Models\Budget\Category;
 use App\User;
-use Faker\Generator as Faker;
 
-$factory->define(Budget::class, function (Faker $faker) {
-    return [
-        'category_id' => function () {
-            return factory(Category::class)->create()->id;
-        },
-        'user_id' => function () {
-            return factory(User::class)->create()->id;
-        },
-        'amount'=>$faker->randomFloat(2,500, 1000),
-        'budget_date'=>\Carbon\Carbon::now()->format('M')
-    ];
-});
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class BudgetFactory extends Factory
+{
+    public function definition()
+    {
+        return [
+            'category_id' => function () {
+                return Category::factory()->create()->id;
+            },
+            'user_id' => function () {
+                return User::factory()->create()->id;
+            },
+            'amount'=>$this->faker->randomFloat(2,500, 1000),
+            'budget_date'=>\Carbon\Carbon::now()->format('M')
+        ];
+    }
+}

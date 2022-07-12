@@ -1,15 +1,20 @@
 <?php
+namespace Database\Factories;
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-use App\Models\Video\Channel;
-use Faker\Generator as Faker;
 
-$factory->define(Channel::class, function (Faker $faker) {
-    return [
-        'user_id' => 1,
-        'name' => $faker->name,
-        'slug' => $faker->name,
-        'uid' => 123,
-    ];
-});
+class ChannelFactory extends Factory
+{
+    public function definition()
+    {
+        $name = $this->faker->name;
+        return [
+            'user_id' => 1,
+            'name' => $name,
+            'slug' => Str::slug($name),
+            'uid' => 123,
+        ];
+    }
+}

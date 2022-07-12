@@ -8,8 +8,12 @@ use App\FakePayment;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
+/**
+ * @property $app
+ * @method post(string $string, array $array)
+ */
 class PurchaseTest extends TestCase
 {
     use RefreshDatabase;
@@ -21,7 +25,7 @@ class PurchaseTest extends TestCase
         $product = Product::factory()->create([
             'price' => 1000
         ]);
-;
+
         $cart = new Cart();
         $cart->add($product, $product->id);
 
@@ -43,10 +47,9 @@ class PurchaseTest extends TestCase
      * @test
      */
     public function it_creates_orders_after_purchase() {
-        $product = factory(Product::class)->create([
+        $product = Product::factory()->create([
             'price' => 1000
         ]);
-
         $cart = new Cart();
         $cart->add($product, $product->id);
 

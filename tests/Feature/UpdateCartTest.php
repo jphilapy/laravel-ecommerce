@@ -16,6 +16,13 @@ class UpdateCartTest extends TestCase
     {
         $product = factory(Product::class)->create();
 
+        /*
+         *
+         *         $product = Product::factory()->create([
+            'price' => 1000
+        ]);
+         */
+
         $response = $this->put('/cart/' . $product->id);
 
         $response->assertRedirect('/cart');
