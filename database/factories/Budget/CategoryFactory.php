@@ -1,9 +1,9 @@
 <?php
-namespace Database\Factories;
+namespace Database\Factories\Budget;
 
-use App\User;
-use Illuminate\Support\Str;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 
 class CategoryFactory extends Factory

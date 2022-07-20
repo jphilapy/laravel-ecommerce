@@ -28,9 +28,9 @@ class ViewTransactionsTest extends TestCase
      */
     public function it_can_display_all_transactions()
     {
-        $user = factory(User::class)->create();
-        $category = factory(Category::class)->create(['user_id'=>$user->id]);
-        $transaction = factory(Transaction::class)->create(['category_id'=>$category->id,'user_id'=>$user->id]);
+        $user = User::factory()->create();
+        $category = Category::factory()->create(['user_id'=>$user->id]);
+        $transaction = Transaction::factory()->create(['category_id'=>$category->id,'user_id'=>$user->id]);
 
         $this->actingAs($user)
             ->withExceptionHandling()
@@ -44,16 +44,16 @@ class ViewTransactionsTest extends TestCase
      */
     public function it_can_filter_transactions_by_category()
     {
-        $user = factory(User::class)->create();
-        factory(Channel::class)->create(['user_id'=>$user->id]);
-        $category = factory(Category::class)->create(['user_id'=>$user->id]);
-        $transaction = factory(Transaction::class)->create([
+        $user = User::factory()->create();
+        Channel::factory()->create(['user_id'=>$user->id]);
+        $category = Category::factory()->create(['user_id'=>$user->id]);
+        $transaction = Transaction::factory()->create([
             'user_id'=> $user->id,
             'category_id'=>$category->id
         ]);
 
 //        dd($category);
-        $otherTransaction = factory(Transaction::class)->create(['user_id'=>99, 'category_id'=>$category->id]);
+        $otherTransaction = Transaction::factory()->create(['user_id'=>99, 'category_id'=>$category->id]);
 
         $this->actingAs($user)
             ->withoutExceptionHandling()
@@ -71,20 +71,20 @@ class ViewTransactionsTest extends TestCase
     {
 
 
-        $user = factory(User::class)->create();
-        factory(Channel::class)->create(['user_id'=>$user->id]);
-        $category = factory(Category::class)->create(['user_id'=>$user->id]);
+        $user = User::factory()->create();
+        Channel::factory()->create(['user_id'=>$user->id]);
+        $category = Category::factory()->create(['user_id'=>$user->id]);
 
-        $otheruser = factory(User::class)->create();
+        $otheruser = User::factory()->create();
 
-        $transaction = factory(Transaction::class)->create(
+        $transaction = Transaction::factory()->create(
             [
                 'user_id' => $user->id,
                 'category_id'=>$category->id
             ]
         );
 
-        $othertransaction = factory(Transaction::class)->create(
+        $othertransaction = Transaction::factory()->create(
             ['user_id' => $otheruser->id]
         );
 
@@ -101,13 +101,13 @@ class ViewTransactionsTest extends TestCase
      */
     public function it_can_filter_transactions_by_month()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
-        factory(Channel::class)->create(['user_id'=>$user->id]);
-        $category = factory(Category::class)->create(['user_id'=>$user->id]);
+        Channel::factory()->create(['user_id'=>$user->id]);
+        $category = Category::factory()->create(['user_id'=>$user->id]);
 
-        $currentTransaction = factory(Transaction::class)->create();
-        $pastTransaction = factory(Transaction::class)->create(
+        $currentTransaction = Transaction::factory()->create();
+        $pastTransaction = Transaction::factory()->create(
             ['category_id'=>$category->id,'user_id' => $user->id, 'created_at' => Carbon::now()->subMonth(2)]
         );
 
@@ -125,12 +125,12 @@ class ViewTransactionsTest extends TestCase
      */
     public function it_can_filter_transactions_by_current_month_by_default()
     {
-        $user = factory(User::class)->create();
-        factory(Channel::class)->create(['user_id'=>$user->id]);
-        $category = factory(Category::class)->create(['user_id'=>$user->id]);
+        $user = User::factory()->create();
+        Channel::factory()->create(['user_id'=>$user->id]);
+        $category = Category::factory()->create(['user_id'=>$user->id]);
 
-        $currentTransaction = factory(Transaction::class)->create(['category_id'=>$category->id,'user_id'=>$user->id]);
-        $pastTransaction = factory(Transaction::class)->create(
+        $currentTransaction = Transaction::factory()->create(['category_id'=>$category->id,'user_id'=>$user->id]);
+        $pastTransaction = Transaction::factory()->create(
             ['user_id' => 99, 'created_at' => Carbon::now()->subMonth(2)]
         );
 

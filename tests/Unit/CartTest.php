@@ -16,7 +16,7 @@ class CartTest extends TestCase
      */
     public function it_can_add_items_to_the_cart()
     {
-        $product = factory(Product::class)->create();
+        $product = Product::factory()->create();
         $cart = new Cart();
 
         $cart->add($product, $product->id);
@@ -29,7 +29,7 @@ class CartTest extends TestCase
      */
     public function it_has_a_total_price()
     {
-        $products = factory(Product::class, 3)->create([
+        $products = Product::factory( 3)->create([
             'price' => 1000
         ]);
         $cart = new Cart();
@@ -45,7 +45,7 @@ class CartTest extends TestCase
      * @test
      */
     public function it_has_a_total_in_cents() {
-        $products = factory(Product::class, 3)->create([
+        $products = Product::factory( 3)->create([
             'price' => 1000
         ]);
         $cart = new Cart();

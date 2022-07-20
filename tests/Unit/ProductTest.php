@@ -14,7 +14,7 @@ class ProductTest extends TestCase
      */
     public function it_has_a_formatted_price()
     {
-        $product = factory(Product::class)->create([
+        $product = Product::factory()->create([
             'price' => 1099
         ]
         );

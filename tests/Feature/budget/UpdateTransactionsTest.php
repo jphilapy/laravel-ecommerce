@@ -19,18 +19,17 @@ class UpdateTransactionsTest extends TestCase
     {
 //        $this->withOutExceptionHandling();
 
-        $user = factory(User::class)->create();
-        $category = factory(Category::class)->create(['user_id'=>$user->id]);
-        $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
-        $newTransaction = factory(Transaction::class)->make(['user_id'=>$user->id, 'category_id'=>$category->id]);
+        $user = User::factory()->create();
+        $category = Category::factory()->create(['user_id'=>$user->id]);
+        $transaction = Transaction::factory()->create(['user_id'=>$user->id]);
+        $newTransaction = Transaction::factory()->make(['user_id'=>$user->id, 'category_id'=>$category->id]);
 
         $this->actingAs($user)
             ->put("/budget/transactions/{$transaction->id}", $newTransaction->toArray())
         ;
 
-        $this->get('/budget/transactions')
+        $this->actingAs($user)->get('/budget/transactions')
             ->assertSee($newTransaction->name);
-
     }
 
     /**
@@ -38,9 +37,9 @@ class UpdateTransactionsTest extends TestCase
      */
     public function it_cannot_update_transactions_without_a_description()
     {
-        $user = factory(User::class)->create();
-        $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
-        $newTransaction = factory(Transaction::class)->make(['description' => null]);
+        $user = User::factory()->create();
+        $transaction = Transaction::factory()->create(['user_id'=>$user->id]);
+        $newTransaction = Transaction::factory()->make(['description' => null]);
 
         $response = $this->actingAs($user)
             ->withExceptionHandling()
@@ -54,9 +53,9 @@ class UpdateTransactionsTest extends TestCase
 
     public function it_cannot_update_transactions_without_a_category()
     {
-        $user = factory(User::class)->create();
-        $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
-        $newTransaction = factory(Transaction::class)->make(['category_id' => null]);
+        $user = User::factory()->create();
+        $transaction = Transaction::factory()->create(['user_id'=>$user->id]);
+        $newTransaction = Transaction::factory()->make(['category_id' => null]);
 
         $response = $this->actingAs($user)
             ->withExceptionHandling()
@@ -70,9 +69,9 @@ class UpdateTransactionsTest extends TestCase
 
     public function it_cannot_update_transactions_without_an_amount()
     {
-        $user = factory(User::class)->create();
-        $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
-        $newTransaction = factory(Transaction::class)->make(['amount' => null]);
+        $user = User::factory()->create();
+        $transaction = Transaction::factory()->create(['user_id'=>$user->id]);
+        $newTransaction = Transaction::factory()->make(['amount' => null]);
 
         $response = $this->actingAs($user)
             ->withExceptionHandling()
@@ -86,9 +85,9 @@ class UpdateTransactionsTest extends TestCase
 
     public function it_cannot_update_transactions_without_a_numerical_amount()
     {
-        $user = factory(User::class)->create();
-        $transaction = factory(Transaction::class)->create(['user_id'=>$user->id]);
-        $newTransaction = factory(Transaction::class)->make(['amount' => 'abc']);
+        $user = User::factory()->create();
+        $transaction = Transaction::factory()->create(['user_id'=>$user->id]);
+        $newTransaction = Transaction::factory()->make(['amount' => 'abc']);
 
         $response = $this->actingAs($user)
             ->withExceptionHandling()

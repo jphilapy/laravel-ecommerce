@@ -19,9 +19,9 @@ class DeleteCategoriesTest extends TestCase
      */
     public function it_can_delete_categories()
     {
-        $user = factory(User::class)->create();
-        factory(Channel::class)->create(['user_id'=>$user->id]);
-        $category = factory(Category::class)->create(['user_id'=>$user->id]);
+        $user = User::factory()->create();
+        Channel::factory()->create(['user_id'=>$user->id]);
+        $category = Category::factory()->create(['user_id'=>$user->id]);
         $this->actingAs($user)
             ->withoutExceptionHandling()->delete("/budget/categories/{$category->slug}")
             ->assertRedirect("/budget/categories");

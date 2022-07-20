@@ -19,10 +19,10 @@ class UpdateCategoriesTest extends TestCase
 
     public function it_can_update_categories()
     {
-        $user = factory(User::class)->create();
-        factory(Channel::class)->create(['user_id'=>$user->id]);
-        $category = factory(Category::class)->create(['user_id'=>$user->id]);
-        $newCategory = factory(Category::class)->make(['user_id'=>$user->id]);
+        $user = User::factory()->create();
+        Channel::factory()->create(['user_id'=>$user->id]);
+        $category = Category::factory()->create(['user_id'=>$user->id]);
+        $newCategory = Category::factory()->make(['user_id'=>$user->id]);
 
         $this->actingAs($user)
             ->withoutExceptionHandling()
@@ -38,11 +38,11 @@ class UpdateCategoriesTest extends TestCase
      */
     public function it_cannot_update_categories_without_a_name()
     {
-        $user = factory(User::class)->create();
-        factory(Channel::class)->create(['user_id'=>$user->id]);
-        $category = factory(Category::class)->create(['user_id'=>$user->id]);
+        $user = User::factory()->create();
+        Channel::factory()->create(['user_id'=>$user->id]);
+        $category = Category::factory()->create(['user_id'=>$user->id]);
 
-        $newCategory = factory(Category::class)->make(['user_id'=>$user->id,'name'=>null]);
+        $newCategory = Category::factory()->make(['user_id'=>$user->id,'name'=>null]);
 
         $response = $this->actingAs($user)
             ->put("/budget/categories/{$category->slug}", $newCategory->toArray())

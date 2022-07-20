@@ -1,9 +1,8 @@
 <?php
-namespace Database\Factories;
+namespace Database\Factories\Budget;
 
 use App\Models\Budget\Category;
-use App\User;
-
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BudgetFactory extends Factory

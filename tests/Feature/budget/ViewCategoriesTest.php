@@ -17,9 +17,9 @@ class ViewCategoriesTest extends TestCase
      */
     public function it_can_display_all_categories()
     {
-        $user = factory(User::class)->create();
-        factory(Channel::class)->create(['user_id'=>$user->id]);
-        $category = factory(Category::class)->create(['user_id'=>$user->id]);
+        $user = User::factory()->create();
+        Channel::factory()->create(['user_id'=>$user->id]);
+        $category = Category::factory()->create(['user_id'=>$user->id]);
 
         $this->actingAs($user)
             ->withoutExceptionHandling()
@@ -42,15 +42,15 @@ class ViewCategoriesTest extends TestCase
 
     public function it_only_displays_categories_that_belong_to_the_currently_logged_in_user()
     {
-        $user = factory(User::class)->create();
-        factory(Channel::class)->create(['user_id'=>$user->id]);
+        $user = User::factory()->create();
+        Channel::factory()->create(['user_id'=>$user->id]);
 
 
-        $category = factory(Category::class)->create(
+        $category = Category::factory()->create(
             ['user_id' => $user->id]
         );
 
-        $otherCategory = factory(Category::class)->create(
+        $otherCategory = Category::factory()->create(
             ['user_id' => 99]
         );
 

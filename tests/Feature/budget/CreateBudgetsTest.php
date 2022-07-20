@@ -18,7 +18,7 @@ class CreateBudgetsTest extends TestCase
     public function it_can_create_budgets()
     {
         $user = User::factory()->create();
-        Channel::factory()->create(['user_id'=>$user->id]);
+        $channel = Channel::factory()->create(['user_id'=>$user->id]);
         $category = Category::factory()->create(['user_id'=>$user->id]);
         $budget = Budget::factory()->make(['category_id'=>$category->id,'user_id'=>$user->id]);
 
