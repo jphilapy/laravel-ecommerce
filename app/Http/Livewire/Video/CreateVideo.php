@@ -27,8 +27,7 @@ class CreateVideo extends Component
 
     public function render()
     {
-        return view('livewire.video.create-video')
-            ->extends('layouts.app');
+        return view('livewire.video.create-video');
     }
 
     public function fileCompleted()

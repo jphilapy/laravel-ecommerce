@@ -11,7 +11,7 @@
                     <div class="card-header">{{ __('Dashboard') }}</div>
 
                     <div class="card-body">
-                        <livewire:video.channel.edit-channel :channel="$channel" />
+
                     </div>
                 </div>
             </div>
