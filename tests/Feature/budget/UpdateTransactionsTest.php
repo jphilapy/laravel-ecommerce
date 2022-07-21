@@ -5,6 +5,7 @@ namespace Tests\Feature\budget;
 use App\Models\Budget\Category;
 use App\Models\Budget\Transaction;
 use App\Models\User;
+use App\Models\Video\Channel;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
@@ -20,6 +21,7 @@ class UpdateTransactionsTest extends TestCase
 //        $this->withOutExceptionHandling();
 
         $user = User::factory()->create();
+        Channel::factory()->create(['user_id'=>$user->id]);
         $category = Category::factory()->create(['user_id'=>$user->id]);
         $transaction = Transaction::factory()->create(['user_id'=>$user->id]);
         $newTransaction = Transaction::factory()->make(['user_id'=>$user->id, 'category_id'=>$category->id]);
